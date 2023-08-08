@@ -3,8 +3,8 @@
 
 class Tower : public ringo::Actor {
 public:
-	Tower(float fireRate, const ringo::Transform& transform, std::shared_ptr<ringo::Model> model) :
-		Actor{ transform, model },
+	Tower(float fireRate, const ringo::Transform& transform) :
+		Actor{ transform },
 		m_fireRate{ fireRate } 
 	{
 		weaponTransform.scale = 1;

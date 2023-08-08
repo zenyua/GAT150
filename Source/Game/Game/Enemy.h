@@ -2,8 +2,9 @@
 #include "Framework/Actor.h"
 class Enemy : public ringo::Actor {
 public:
-	Enemy(float speed, float turnRate, const ringo::Transform& transform, std::shared_ptr<ringo::Model> model) :
-		Actor{ transform, model },
+	//removed , std::shared_ptr<ringo::Model> model
+	Enemy(float speed, float turnRate, const ringo::Transform& transform) :
+		Actor{ transform }, //removed , model 
 		m_speed{ speed },
 		m_turnRate{ turnRate }
 	{

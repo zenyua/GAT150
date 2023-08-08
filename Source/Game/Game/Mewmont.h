@@ -1,7 +1,7 @@
 #pragma once
 #include "Framework/Game.h"
-#include <Renderer/Font.h>
-#include <Renderer/Text.h>
+#include "Renderer/Font.h"
+#include "Renderer/Text.h"
 #include "Renderer/Model.h"
 #include <array>
 

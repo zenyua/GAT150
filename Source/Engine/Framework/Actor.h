@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Renderer/Model.h"
-
+#include "Framework/Components/Component.h"
 #include <memory>
 
 namespace ringo {
@@ -11,33 +11,39 @@ namespace ringo {
 		Actor(const ringo::Transform& transform) :
 			m_transform{ transform }
 		{}
-		Actor(const ringo::Transform& transform, std::shared_ptr<Model> model) :
-			m_model{ model },
-			m_transform{ transform } {}
 
 		virtual void Update(float dt);
 		virtual void Draw(ringo::Renderer& renderer);
 
-		float GetRadius() { return (m_model) ? m_model->GetRadius() * m_transform.scale : 0; }
-		virtual void OnCollision(Actor* other) {};
+		void AddComponent(std::unique_ptr<Component> component);
+		template<typename T>
+		T* GetComponent();
 
-		void AddForce(vec2 force) { m_velocity += force; }
-		void SetDamping(float damping) { m_damping = damping; }
+		float GetRadius() { return 30.0f; }
+		virtual void OnCollision(Actor* other) {};
 
 		class Scene* m_scene = nullptr;
 		friend class Scene;
+
 		class Game* m_game = nullptr;
 
 		ringo::Transform m_transform;
 		std::string m_tag;
 		float m_lifespan = -1.0f;
+
 	protected:
+		std::vector<std::unique_ptr<Component>> m_components;
 		bool m_destroyed = false;
-
-		std::shared_ptr<Model> m_model;
-
-		vec2 m_velocity = 0;
-		//slows stuff down if it's closer to 1
-		float m_damping = 0;
 	};
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& component : m_components) {
+			T* result = dynamic_cast<T*>(component.get());
+			if (result) return result;
+		}
+		return nullptr;
+	}
+
 }

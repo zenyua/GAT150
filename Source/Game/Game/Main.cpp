@@ -1,9 +1,7 @@
 #include "Core/Core.h"
 
 #include "Renderer/Renderer.h"
-#include "Renderer/Model.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
+#include "Renderer/Texture.h"
 
 #include "Input/Inputsystem.h"
 
@@ -13,15 +11,27 @@
 
 #include <iostream>
 #include <vector>
+#include <cassert>
+#include <array>
+#include <map>
+#include <Framework/Resource/ResourceManager.h>
+
+template <typename T>
+void print(const std::string& s, const T& container)
+{
+	std::cout << s << std::endl;
+		for (auto element : container)
+		{
+			std::cout << element << " ";
+		}
+	std::cout << std::endl;
+}
 
 using vec2 = ringo::Vector2;
 
 int main(int argc, char* argv[]) {
-	//debug stuff
-#ifdef _DEBUG
-	std::cout << "debug mode\n";
-#endif _DEBUG
 
+	INFO_LOG("testmsg")
 
 	//set up memory
 	ringo::MemoryTracker::Initialize();
@@ -49,12 +59,18 @@ int main(int argc, char* argv[]) {
 	//set up input
 	ringo::g_inputSystem.Initialize();
 
+	//make a texture
+	ringo::res_t<ringo::Texture> texture = ringo::g_resources.Get<ringo::Texture>("kirbyb.png", ringo::g_renderer);
+
 	bool quit = false;
 	while (!quit) {
 		//renderer setup
 		ringo::g_renderer.SetColor(255, 255, 255, 0);
 		ringo::g_renderer.BeginFrame();
 		ringo::g_renderer.SetColor(1, 1, 1, 255);
+
+		//draw a texture
+		ringo::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 
 		//time stuff
 		ringo::g_time.Tick();
@@ -89,33 +105,3 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }
-
-
-
-//if (ringo::g_inputSystem.GetMouseButtonDown(0) && !ringo::g_inputSystem.GetMousePrevButtonDown(0)) {
-//	std::cout << "left down.\n";
-//	std::cout << "x: " << ringo::g_inputSystem.GetMousePosition().x;
-//	std::cout << " y: " << ringo::g_inputSystem.GetMousePosition().y;
-//	std::cout << "\n";
-//}
-//if (ringo::g_inputSystem.GetMouseButtonDown(1) && !ringo::g_inputSystem.GetMousePrevButtonDown(1)) {
-//	std::cout << "middle down.\n";
-//	std::cout << "x: " << ringo::g_inputSystem.GetMousePosition().x;
-//	std::cout << " y: " << ringo::g_inputSystem.GetMousePosition().y;
-//	std::cout << "\n";
-//}
-//if (ringo::g_inputSystem.GetMouseButtonDown(2) && !ringo::g_inputSystem.GetMousePrevButtonDown(2)) {
-//	std::cout << "right down.\n";
-//	std::cout << "x: " << ringo::g_inputSystem.GetMousePosition().x;
-//	std::cout << " y: " << ringo::g_inputSystem.GetMousePosition().y;
-//	std::cout << "\n";
-//}
-
-//player movement stuff
-		/*ringo::vec2 direction{0, 0};
-		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) direction.y = -1;
-		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_S)) direction.y = 1;
-		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) direction.x = -1;
-		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) direction.x = 1;
-		direction = direction * speed * ringo::g_time.GetDeltaTime();
-		transform.position = transform.position + direction;*/

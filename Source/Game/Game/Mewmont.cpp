@@ -1,29 +1,38 @@
 #include "Mewmont.h"
+
 #include "Player.h"
 #include "Enemy.h"
 #include "Tower.h"
 
 #include "Audio/AudioSystem.h"
+
 #include "Input/InputSystem.h"
+
 #include "Renderer/Renderer.h"
-#include "Renderer/Text.h"
 #include "Renderer/ModelManager.h"
-#include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
+
+#include "Framework/Emitter.h"
+#include "Framework/Components/SpriteComponent.h"
+#include "Framework/Components/EnginePhysicsComponent.h"
+
+//supposed to be framework
+#include "Framework/Resource/ResourceManager.h"
 
 bool Mewmont::Initialize()
 {
 	//set up text
-	m_font = std::make_shared<ringo::Font>("organo.ttf", 48);
-	m_titleText = std::make_unique<ringo::Text>(m_font);
+	//m_font = std::make_shared<ringo::Font>("organo.ttf", 48); //"cannot instantiate abstract class"
+	//m_font = ringo::g_resources.Get<ringo::Font>("organo.ttf", 24); //replace all m_font with the part to the right of the =
+	m_titleText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	m_titleText->Create(ringo::g_renderer, "mewmont", ringo::Color{1, 1, 1, 1});
-	m_scoreText = std::make_unique<ringo::Text>(m_font);
+	m_scoreText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	m_scoreText->Create(ringo::g_renderer, "0", ringo::Color{1, 1, 1, 1});
-	m_gameOverText = std::make_unique<ringo::Text>(m_font);
+	m_gameOverText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	m_gameOverText->Create(ringo::g_renderer, "Game Over", ringo::Color{1, 1, 1, 1});
-	m_scoreTitleText = std::make_unique<ringo::Text>(m_font);
+	m_scoreTitleText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	m_scoreTitleText->Create(ringo::g_renderer, "High Scores", ringo::Color{1, 1, 1, 1});
-	m_moneyText = std::make_unique<ringo::Text>(m_font);
+	m_moneyText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 
 	//set up scores
 	for (int i = 0; i < m_scoresTexts.size(); i++)
@@ -67,14 +76,15 @@ void Mewmont::Update(float dt)
 		break;
 	case Mewmont::eState::StartLevel:
 	{
+		//maple's transform is inline
 		ringo::Transform transform;
-		transform.position = { 300,300 };
-		transform.scale = 10;
-		std::shared_ptr<ringo::Model> model = std::make_shared<ringo::Model>();
-		model->Load("cat.txt");
-		std::unique_ptr<Player> player = std::make_unique<Player>(2,0.1f,transform,model,this);
+		transform.position = { 300.0f,300.0f };
+		transform.scale = 10.0f;
+
+		//std::shared_ptr<ringo::Model> model = std::make_shared<ringo::Model>(); remove
+		//model->Load("cat.txt"); remove
+		std::unique_ptr<Player> player = std::make_unique<Player>(2.0f,0.1f,transform,this); //removed model,
 		player->m_tag = "Player";
-		m_scene->Add(std::move(player));
 
 		//heart model
 		m_heart->Load("heart.txt");
@@ -88,6 +98,17 @@ void Mewmont::Update(float dt)
 		//tower model
 		m_tower->Load("tower.txt");
 
+		//create components
+		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
+		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
+		player->AddComponent(std::move(component));
+
+		auto physicsComponent = std::make_unique<ringo::EnginePhysicsComponent>();
+		physicsComponent->m_damping = 0.9f;
+		player->AddComponent(std::move(physicsComponent));
+
+		m_scene->Add(std::move(player));
+
 		m_state = eState::Game;
 		break;
 	}
@@ -97,7 +118,8 @@ void Mewmont::Update(float dt)
 		m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 6}, ringo::g_manager.Get("enemy.txt"));
+			//removed , ringo::g_manager.Get("enemy.txt")
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 6});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			m_scene->Add(std::move(enemy));
@@ -111,7 +133,7 @@ void Mewmont::Update(float dt)
 			transform.position = ringo::g_inputSystem.GetMousePosition();
 			transform.scale = 5;
 			transform.rotation = ringo::randomf(360);
-			std::unique_ptr<Tower> tower = std::make_unique<Tower>(5,transform,m_tower);
+			std::unique_ptr<Tower> tower = std::make_unique<Tower>(5.0f,transform);
 			tower->m_tag = "Tower";
 			tower->m_game = this;
 			m_scene->Add(std::move(tower));

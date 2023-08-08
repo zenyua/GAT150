@@ -86,7 +86,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ThirdPartyDir)SDL2-2.28.0\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -111,7 +111,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ThirdPartyDir)SDL2-2.28.0\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -132,7 +132,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ThirdPartyDir)SDL2-2.28.0\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -157,7 +157,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(ThirdPartyDir)SDL2-2.28.0\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -174,6 +174,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Font.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.vcxproj">

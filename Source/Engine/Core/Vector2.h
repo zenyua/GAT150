@@ -31,7 +31,7 @@ namespace ringo {
 		float Length() { return std::sqrt(LengthSqr()); }
 
 		float Distance(const Vector2& v) 
-		{ return (std::sqrt(pow(abs(v.y-y),2)+pow(abs(v.x-x),2.0f))); }
+		{ return ((float)std::sqrt((float)pow(abs(v.y-y),2.0f)+(float)pow(abs(v.x-x),2.0f))); }
 
 		float Angle() const { return std::atan2f(y, x); }
 		//maple doesn't have & on this or definition

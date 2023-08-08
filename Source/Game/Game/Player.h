@@ -4,11 +4,11 @@
 
 class Player : public ringo::Actor {
 public:
-	Player(const ringo::Transform& transform, std::shared_ptr<ringo::Model> model, Mewmont* game) :
-		Actor{ transform, model },
+	Player(const ringo::Transform& transform, Mewmont* game) :
+		Actor{ transform },
 		m_game{ game } {}
-	Player(float speed, float turnRate, const ringo::Transform& transform, std::shared_ptr<ringo::Model> model, Mewmont* game) :
-		Actor{ transform, model },
+	Player(float speed, float turnRate, const ringo::Transform& transform, Mewmont* game) :
+		Actor{ transform },
 		m_speed{ speed },
 		m_turnRate{ turnRate },
 		m_game { game } {}

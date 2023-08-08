@@ -1,7 +1,10 @@
 #include "AudioSystem.h"
 
+#pragma warning(disable: 4102)
+
 namespace ringo {
 	AudioSystem g_audioSystem;
+
 	bool AudioSystem::Initialize() {
 		FMOD:System_Create(&m_fmodSystem);
 

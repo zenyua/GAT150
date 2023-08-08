@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include "Logger.h"
 
 namespace ringo {
 	std::string ringo::getFilePath()
@@ -13,6 +14,10 @@ namespace ringo {
 		std::error_code ec;
 		std::filesystem::current_path(path, ec);
 		return ec.value() == 0;
+	}
+	std::string getFileName(const std::filesystem::path& path)
+	{
+		return path.filename().string();
 	}
 	bool fileExists(const std::filesystem::path& path)
 	{
@@ -26,16 +31,19 @@ namespace ringo {
 	}
 	bool readFile(const std::filesystem::path& path, std::string& buffer)
 	{
-		/*if (!fileExists(path)) return false;
-		size_t size = 0;
+		if (!fileExists(path)) {    //this should work now. this is the code maple has
+			WARNING_LOG("file not loaded: " << path.string());
+			return false;
+			}
+		size_t size;
 		if (!getFileSize(path, size)) return false;
 		buffer.resize(size);
-		std::ifstream stream;
+		std::ifstream stream(path);
 		stream.read(buffer.data(), size);
 		stream.close();
-		return true;*/
+		return true;
 
-		if (!std::filesystem::exists(path)) {
+		/*if (!std::filesystem::exists(path)) {
 			std::cerr << "Error: File does not exist: " << path << std::endl;
 			return false;
 		}
@@ -56,6 +64,6 @@ namespace ringo {
 		}
 
 		file.close();
-		return true;
+		return true;*/
 	}
 }

@@ -4,6 +4,10 @@
 #include <fstream>
 
 namespace ringo {
+	bool Model::Create(std::string filename, ...) {
+		return Load(filename);
+	}
+
 	bool Model::Load(const std::string& filename) {
 		std::string buffer;
 		ringo::readFile(filename, buffer);
@@ -38,7 +42,7 @@ namespace ringo {
 		{
 			vec2 p1 = (m_points[i]*scale).Rotate(rotation) + position;
 			vec2 p2 = (m_points[i + 1]*scale).Rotate(rotation) + position;
-			renderer.DrawLine(p1.x, p1.y, p2.x, p2.y);
+			renderer.DrawLine((float)p1.x, (float)p1.y, (float)p2.x, (float)p2.y);
 		}
 	}
 	void Model::Draw(Renderer& renderer, const Transform& transform)

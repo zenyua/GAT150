@@ -2,8 +2,9 @@
 #include "Framework/Actor.h"
 class Weapon : public ringo::Actor {
 public:
-	Weapon(float speed, const ringo::Transform& transform, std::shared_ptr<ringo::Model> model) :
-		Actor{ transform, model },
+	//, std::shared_ptr<ringo::Model> model was removed
+	Weapon(float speed, const ringo::Transform& transform) :
+		Actor{ transform }, //, model
 		m_speed{ speed }
 	{
 		m_lifespan = 10.0f;

@@ -2,6 +2,7 @@
 
 #include "Color.h"
 #include "FileIO.h"
+#include "Logger.h"
 #include "MathUtils.h"
 #include "Memory.h"
 #include "Random.h"

@@ -17,10 +17,15 @@ namespace ringo {
 
 		void SetColor(int r, int g, int b, int a);
 		void DrawLine(int x1, int y1, int x2, int y2);
+		void DrawLine(float x1, float y1, float x2, float y2);
 		friend class Text;
 
 		int GetWidth() const { return m_width; }
 		int GetHeight() const { return m_height; }
+
+		friend class Texture;
+
+		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
 
 	private:
 		int m_width = 0;

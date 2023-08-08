@@ -13,9 +13,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -28,15 +25,18 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
@@ -49,6 +49,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
