@@ -28,7 +28,7 @@ public:
 	eState m_state = eState::Title;
 private:
 	float m_spawnTimer = 0;
-	float m_spawnTime = 30;
+	float m_spawnTime = 60;
 
 	float m_stateTimer = 0;
 	float m_gameTimer = 0;
@@ -43,9 +43,6 @@ private:
 	ringo::Transform transformH2;
 	ringo::Transform transformH1;
 
-	//std::unique_ptr<ringo::Model> m_player;
-
-	std::shared_ptr<ringo::Font> m_font;
 	std::unique_ptr<ringo::Text> m_scoreText;
 	std::unique_ptr<ringo::Text> m_titleText;
 	std::unique_ptr<ringo::Text> m_scoreTitleText;

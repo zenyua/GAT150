@@ -7,7 +7,7 @@ public:
 		Actor{ transform },
 		m_speed{ speed }
 	{
-		m_lifespan = 10.0f;
+		m_lifespan = 30.0f;
 	}
 
 	bool Initialize() override;

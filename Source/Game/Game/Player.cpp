@@ -8,7 +8,6 @@
 #include <Framework/Components/PhysicsComponent.h>
 #include <Framework/Resource/ResourceManager.h>
 #include <Framework/Components/CircleCollisionComponent.h>
-//#include <Framework/Components/EnginePhysicsComponent.h>
 
 bool Player::Initialize() {
 	Actor::Initialize();
@@ -17,10 +16,10 @@ bool Player::Initialize() {
 	m_physicsComponent = GetComponent<ringo::PhysicsComponent>();
 	auto collisionComponent = GetComponent<ringo::CollisionComponent>();
 	if (collisionComponent) {
-		auto renderComponent = GetComponent<ringo::RenderComponent>();
-		if (renderComponent) {
+		auto spriteComponent = GetComponent<ringo::SpriteComponent>();
+		if (spriteComponent) {
 			float scale = m_transform.scale;
-			collisionComponent->m_radius = renderComponent->GetRadius() * scale * 0.75f;
+			collisionComponent->m_radius = spriteComponent->GetRadius() * scale * 0.75f;
 		}
 	}
 
@@ -33,14 +32,25 @@ void Player::Update(float dt)
 
 	//rotate ship
 	float rotate = 0;
-	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
-	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) rotate = 1;
+	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) {
+		rotate = -1;
+		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyA.png", ringo::g_renderer);
+	}
+	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) {
+		rotate = 1;
+		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyD.png", ringo::g_renderer);
+	}
 	m_transform.rotation += rotate * m_turnRate * ringo::g_time.GetDeltaTime();
+
+	//ringo::SpriteComponent* sc = GetComponent<ringo::SpriteComponent>();
+	//sc->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
+	
 
 	//forward/backwards motion
 	float thrust = 0.0f;
 	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) {
 		thrust = 1.0f;
+		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
 	}
 
 	ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(m_transform.rotation);
@@ -72,7 +82,7 @@ void Player::Update(float dt)
 
 		//maple had to include texture, but i didn't? also resourcemanager
 		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
+		component->m_texture = ringo::g_resources.Get<ringo::Texture>("kirbyl.png", ringo::g_renderer);
 		weapon->AddComponent(std::move(component));
 
 		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
@@ -86,7 +96,7 @@ void Player::Update(float dt)
 		weapon->m_tag = "Weapon";
 
 		component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
+		component->m_texture = ringo::g_resources.Get<ringo::Texture>("kirbyl.png", ringo::g_renderer);
 		weapon->AddComponent(std::move(component));
 
 		collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();

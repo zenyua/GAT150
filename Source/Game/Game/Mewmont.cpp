@@ -15,8 +15,6 @@
 bool Mewmont::Initialize()
 {
 	//set up text
-	//m_font = std::make_shared<ringo::Font>("organo.ttf", 48); //"cannot instantiate abstract class"
-	//m_font = ringo::g_resources.Get<ringo::Font>("organo.ttf", 24); //replace all m_font with the part to the right of the =
 	m_titleText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	m_titleText->Create(ringo::g_renderer, "mewmont", ringo::Color{1, 1, 1, 1});
 	m_scoreText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
@@ -30,7 +28,7 @@ bool Mewmont::Initialize()
 	//set up scores
 	for (int i = 0; i < m_scoresTexts.size(); i++)
 	{
-		m_scoresTexts[i] = std::make_unique<ringo::Text>(m_font);
+		m_scoresTexts[i] = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
 	}
 	for (int score : m_scores) {
 		score = 0;
@@ -71,12 +69,10 @@ void Mewmont::Update(float dt)
 	{
 		//maple's transform is inline
 		ringo::Transform transform;
-		transform.position = { 300.0f,300.0f };
-		transform.scale = 10.0f;
+		transform.position = { 500.0f, 500.0f };
+		transform.scale = 1.0f;
 
-		//std::shared_ptr<ringo::Model> model = std::make_shared<ringo::Model>(); remove
-		//model->Load("cat.txt"); remove
-		std::unique_ptr<Player> player = std::make_unique<Player>(2.0f,0.1f,transform,this); //removed model,
+		std::unique_ptr<Player> player = std::make_unique<Player>(2.0f,0.1f,transform,this);
 		player->m_tag = "Player";
 
 		//heart model
@@ -91,13 +87,9 @@ void Mewmont::Update(float dt)
 		//tower model
 		m_tower->Load("tower.txt");
 
-		//create components
-		/*std::unique_ptr<ringo::ModelRenderComponent> component = std::make_unique<ringo::ModelRenderComponent>();
-		component->m_model = ringo::g_resources.Get<ringo::Model>("ship.txt");
-		player->AddComponent(std::move(component));*/
-		//diff way
+		//make player components
 		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
+		component->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
 		player->AddComponent(std::move(component));
 
 		auto physicsComponent = std::make_unique<ringo::EnginePhysicsComponent>();
@@ -105,7 +97,7 @@ void Mewmont::Update(float dt)
 		player->AddComponent(std::move(physicsComponent));
 
 		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
-		collisionComponent->m_radius = 30.0f;
+		collisionComponent->m_radius = 10.0f;
 		player->AddComponent(std::move(collisionComponent));
 
 		player->Initialize();
@@ -119,14 +111,18 @@ void Mewmont::Update(float dt)
 		ringo::g_particleSystem.Update(dt);
 		m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
+
 			m_spawnTimer = 0;
-			//removed , ringo::g_manager.Get("enemy.txt")
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 6});
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 1});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 
+			auto spriteComponent = std::make_unique<ringo::SpriteComponent>();
+			spriteComponent->m_texture = ringo::g_resources.Get<ringo::Texture>("Kirbo.png", ringo::g_renderer);
+			enemy->AddComponent(std::move(spriteComponent));
+
 			auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
-			collisionComponent->m_radius = 30.0f;
+			collisionComponent->m_radius = 10.0f;
 			enemy->AddComponent(std::move(collisionComponent));
 
 			enemy->Initialize();
@@ -135,7 +131,7 @@ void Mewmont::Update(float dt)
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
 			ringo::g_audioSystem.PlayOneShot("laser");
 		}
-		if (ringo::g_inputSystem.GetMouseButtonDown(0) && !ringo::g_inputSystem.GetMousePrevButtonDown(0) && m_money >= 50) {
+		/*if (ringo::g_inputSystem.GetMouseButtonDown(0) && !ringo::g_inputSystem.GetMousePrevButtonDown(0) && m_money >= 50) {
 			m_money -= 50;
 			ringo::Transform transform;
 			transform.position = ringo::g_inputSystem.GetMousePosition();
@@ -145,7 +141,7 @@ void Mewmont::Update(float dt)
 			tower->m_tag = "Tower";
 			tower->m_game = this;
 			m_scene->Add(std::move(tower));
-		}
+		}*/
 		m_moneyText->Create(ringo::g_renderer, "Gold: " + std::to_string(m_money), ringo::Color{1, 1, 1, 1});
 		break;
 	}

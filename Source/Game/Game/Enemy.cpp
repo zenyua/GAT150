@@ -12,10 +12,10 @@ bool Enemy::Initialize()
 	Actor::Initialize();
 	auto collisionComponent = GetComponent<ringo::CollisionComponent>();
 	if (collisionComponent) {
-		auto renderComponent = GetComponent<ringo::RenderComponent>();
-		if (renderComponent) {
+		auto spriteComponent = GetComponent<ringo::SpriteComponent>();
+		if (spriteComponent) {
 			float scale = m_transform.scale;
-			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+			collisionComponent->m_radius = spriteComponent->GetRadius() * scale;
 		}
 	}
 
