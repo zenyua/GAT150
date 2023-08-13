@@ -1,5 +1,22 @@
 #include "Weapon.h"
 #include "Input/InputSystem.h"
+#include "Renderer/Renderer.h"
+#include "Framework/Framework.h"
+
+bool Weapon::Initialize()
+{
+	Actor::Initialize();
+	auto collisionComponent = GetComponent<ringo::CollisionComponent>();
+	if (collisionComponent) {
+		auto renderComponent = GetComponent<ringo::RenderComponent>();
+		if (renderComponent) {
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+		}
+	}
+
+	return true;
+}
 
 void Weapon::Update(float dt)
 {

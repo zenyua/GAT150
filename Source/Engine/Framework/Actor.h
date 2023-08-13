@@ -1,16 +1,20 @@
 #pragma once
+#include "Object.h"
 #include "Core/Core.h"
 #include "Renderer/Model.h"
 #include "Framework/Components/Component.h"
 #include <memory>
 
 namespace ringo {
-	class Actor {
+	class Actor : public Object{
 	public:
 		Actor() = default;
 		Actor(const ringo::Transform& transform) :
 			m_transform{ transform }
 		{}
+
+		virtual bool Initialize() override;
+		virtual void OnDestroy() override;
 
 		virtual void Update(float dt);
 		virtual void Draw(ringo::Renderer& renderer);

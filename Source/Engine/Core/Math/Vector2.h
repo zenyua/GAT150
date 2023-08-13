@@ -12,6 +12,12 @@ namespace ringo {
 		Vector2(float x, float y) : x{ x }, y{ y } {}
 		Vector2(int x, int y) : x{ (float)x }, y{ (float)y } {}
 
+		//v[0] returns x, v[1] returns y
+		float operator [] (size_t index) const { return (&x)[index]; }
+		float& operator [] (size_t index) { return (&x)[index]; }
+
+		Vector2 operator - () { return Vector2(-x, -y); }
+
 		Vector2 operator + (const Vector2& v) const { return Vector2(x + v.x, y + v.y); }
 		Vector2 operator - (const Vector2& v) const { return Vector2(x - v.x, y - v.y); }
 		Vector2 operator / (const Vector2& v) const { return Vector2(x / v.x, y / v.y); }
@@ -30,8 +36,10 @@ namespace ringo {
 		float LengthSqr() { return (x * x) + (y * y); }
 		float Length() { return std::sqrt(LengthSqr()); }
 
-		float Distance(const Vector2& v) 
-		{ return ((float)std::sqrt((float)pow(abs(v.y-y),2.0f)+(float)pow(abs(v.x-x),2.0f))); }
+		float Distance(const Vector2& v)
+		{
+			return ((float)std::sqrt((float)pow(abs(v.y - y), 2.0f) + (float)pow(abs(v.x - x), 2.0f)));
+		}
 
 		float Angle() const { return std::atan2f(y, x); }
 		//maple doesn't have & on this or definition

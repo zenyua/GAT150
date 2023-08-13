@@ -1,8 +1,8 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer.h"
 
 namespace ringo {
+
 	struct ParticleData {
 		vec2 position;
 		vec2 prevPosition;
@@ -22,7 +22,7 @@ namespace ringo {
 			m_isActive = true;
 		}
 		void Update(float dt);
-		void Draw(Renderer& renderer);
+		void Draw(class Renderer& renderer); //can't use renderer's methods here cuz it doesn't know what it is. class just says that it exists
 		friend class ParticleSystem;
 	private:
 		ParticleData m_data;

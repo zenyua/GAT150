@@ -1,5 +1,7 @@
 #include "Mewmont.h"
 
+#include "Framework/Framework.h"
+
 #include "Player.h"
 #include "Enemy.h"
 #include "Tower.h"
@@ -9,15 +11,6 @@
 #include "Input/InputSystem.h"
 
 #include "Renderer/Renderer.h"
-#include "Renderer/ModelManager.h"
-#include "Renderer/ParticleSystem.h"
-
-#include "Framework/Emitter.h"
-#include "Framework/Components/SpriteComponent.h"
-#include "Framework/Components/EnginePhysicsComponent.h"
-
-//supposed to be framework
-#include "Framework/Resource/ResourceManager.h"
 
 bool Mewmont::Initialize()
 {
@@ -99,6 +92,10 @@ void Mewmont::Update(float dt)
 		m_tower->Load("tower.txt");
 
 		//create components
+		/*std::unique_ptr<ringo::ModelRenderComponent> component = std::make_unique<ringo::ModelRenderComponent>();
+		component->m_model = ringo::g_resources.Get<ringo::Model>("ship.txt");
+		player->AddComponent(std::move(component));*/
+		//diff way
 		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
 		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
 		player->AddComponent(std::move(component));
@@ -107,6 +104,11 @@ void Mewmont::Update(float dt)
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
+		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		player->AddComponent(std::move(collisionComponent));
+
+		player->Initialize();
 		m_scene->Add(std::move(player));
 
 		m_state = eState::Game;
@@ -122,6 +124,12 @@ void Mewmont::Update(float dt)
 			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 6});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
+
+			auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			enemy->AddComponent(std::move(collisionComponent));
+
+			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 		}
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {

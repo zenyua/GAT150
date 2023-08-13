@@ -1,14 +1,17 @@
 #pragma once
 #include "Framework/Actor.h"
+
 class Weapon : public ringo::Actor {
 public:
-	//, std::shared_ptr<ringo::Model> model was removed
 	Weapon(float speed, const ringo::Transform& transform) :
-		Actor{ transform }, //, model
+		Actor{ transform },
 		m_speed{ speed }
 	{
 		m_lifespan = 10.0f;
 	}
+
+	bool Initialize() override;
+
 	void Update(float dt) override;
 	void OnCollision(Actor* other) override;
 private:

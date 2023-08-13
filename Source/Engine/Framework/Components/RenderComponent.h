@@ -1,11 +1,10 @@
 #pragma once
 #include "Component.h"
-#include "Renderer/Renderer.h"
 
 namespace ringo {
 	class RenderComponent : public Component {
 	public:
-		//try ringo:: instead of include?
-		virtual void Draw(Renderer& renderer) = 0;
+		virtual void Draw(class Renderer& renderer) = 0;
+		virtual float GetRadius() { return 0; }
 	};
 }

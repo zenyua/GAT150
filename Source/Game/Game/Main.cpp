@@ -1,7 +1,6 @@
 #include "Core/Core.h"
-
+#include "Framework/Framework.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/Texture.h"
 
 #include "Input/Inputsystem.h"
 
@@ -14,7 +13,6 @@
 #include <cassert>
 #include <array>
 #include <map>
-#include <Framework/Resource/ResourceManager.h>
 
 template <typename T>
 void print(const std::string& s, const T& container)
@@ -28,6 +26,9 @@ void print(const std::string& s, const T& container)
 }
 
 using vec2 = ringo::Vector2;
+
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -60,7 +61,7 @@ int main(int argc, char* argv[]) {
 	ringo::g_inputSystem.Initialize();
 
 	//make a texture
-	ringo::res_t<ringo::Texture> texture = ringo::g_resources.Get<ringo::Texture>("kirbyb.png", ringo::g_renderer);
+	//ringo::res_t<ringo::Texture> texture = ringo::g_resources.Get<ringo::Texture>("KirbyB.png", ringo::g_renderer);
 
 	bool quit = false;
 	while (!quit) {
@@ -70,7 +71,7 @@ int main(int argc, char* argv[]) {
 		ringo::g_renderer.SetColor(1, 1, 1, 255);
 
 		//draw a texture
-		ringo::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
+		//ringo::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 
 		//time stuff
 		ringo::g_time.Tick();

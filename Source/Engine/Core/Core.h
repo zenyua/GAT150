@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Color.h"
+#include "Math/Color.h"
+#include "Math/MathUtils.h"
+#include "Math/Transform.h"
+#include "Math/Vector2.h"
+
 #include "FileIO.h"
 #include "Logger.h"
-#include "MathUtils.h"
 #include "Memory.h"
 #include "Random.h"
 #include "Time.h"
-#include "Transform.h"
-#include "Vector2.h"

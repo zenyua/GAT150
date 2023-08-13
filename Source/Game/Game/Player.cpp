@@ -3,11 +3,29 @@
 #include "Renderer/Renderer.h"
 #include "Weapon.h"
 #include "Framework/Scene.h"
-#include "Core/MathUtils.h"
+#include "Core/Core.h"
 #include <Framework/Components/SpriteComponent.h>
 #include <Framework/Components/PhysicsComponent.h>
 #include <Framework/Resource/ResourceManager.h>
+#include <Framework/Components/CircleCollisionComponent.h>
 //#include <Framework/Components/EnginePhysicsComponent.h>
+
+bool Player::Initialize() {
+	Actor::Initialize();
+
+	//cache off
+	m_physicsComponent = GetComponent<ringo::PhysicsComponent>();
+	auto collisionComponent = GetComponent<ringo::CollisionComponent>();
+	if (collisionComponent) {
+		auto renderComponent = GetComponent<ringo::RenderComponent>();
+		if (renderComponent) {
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->GetRadius() * scale * 0.75f;
+		}
+	}
+
+	return true;
+}
 
 void Player::Update(float dt)
 {
@@ -27,8 +45,7 @@ void Player::Update(float dt)
 
 	ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(m_transform.rotation);
 
-	auto physicsComponent = GetComponent<ringo::PhysicsComponent>();
-	physicsComponent->ApplyForce(forward * m_speed * thrust);
+	m_physicsComponent->ApplyForce(forward * m_speed * thrust);
 
 	m_transform.position.x = ringo::Wrap(m_transform.position.x, static_cast<float>(ringo::g_renderer.GetWidth()));
 	m_transform.position.y = ringo::Wrap(m_transform.position.y, static_cast<float>(ringo::g_renderer.GetHeight()));
@@ -58,6 +75,10 @@ void Player::Update(float dt)
 		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
 		weapon->AddComponent(std::move(component));
 
+		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		weapon->AddComponent(std::move(collisionComponent));
+
 		m_scene->Add(std::move(weapon));
 
 		ringo::Transform transform2{m_transform.position, m_transform.rotation - ringo::DegreesToRadians(-10), 1};
@@ -67,6 +88,10 @@ void Player::Update(float dt)
 		component = std::make_unique<ringo::SpriteComponent>();
 		component->m_texture = ringo::g_resources.Get<ringo::Texture>("ship.png", ringo::g_renderer);
 		weapon->AddComponent(std::move(component));
+
+		collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		weapon->AddComponent(std::move(collisionComponent));
 
 		m_scene->Add(std::move(weapon));
 	}

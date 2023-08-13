@@ -1,5 +1,7 @@
 #include "Model.h"
+#include "Renderer.h"
 #include <sstream>
+//maple doesn't have these two below
 #include <iostream>
 #include <fstream>
 
@@ -10,7 +12,9 @@ namespace ringo {
 
 	bool Model::Load(const std::string& filename) {
 		std::string buffer;
-		ringo::readFile(filename, buffer);
+		if (!ringo::readFile(filename, buffer)) {
+			WARNING_LOG("Could not load file");
+		}
 
 		std::istringstream stream(buffer);
 
@@ -38,6 +42,7 @@ namespace ringo {
 	void Model::Draw(Renderer& renderer, const vec2& position, float rotation, float scale)
 	{
 		if (m_points.empty()) return;
+		renderer.SetColor(Color::ToInt(m_color.r), Color::ToInt(m_color.g), Color::ToInt(m_color.b), Color::ToInt(m_color.a));
 		for (int i = 0; i < m_points.size()-1; i++)
 		{
 			vec2 p1 = (m_points[i]*scale).Rotate(rotation) + position;
@@ -47,7 +52,19 @@ namespace ringo {
 	}
 	void Model::Draw(Renderer& renderer, const Transform& transform)
 	{
-		Draw(renderer, transform.position, transform.rotation, transform.scale);
+		if (m_points.empty()) return;
+
+		mat3 mx = transform.GetMatrix();
+
+		renderer.SetColor(Color::ToInt(m_color.r), Color::ToInt(m_color.g), Color::ToInt(m_color.b), Color::ToInt(m_color.a));
+		for (int i = 0; i < m_points.size() - 1; i++)
+		{
+			vec2 p1 = mx * m_points[i];
+			vec2 p2 = mx * m_points[i + 1];
+
+			//don't need float casts here
+			renderer.DrawLine((float)p1.x, (float)p1.y, (float)p2.x, (float)p2.y);
+		}
 	}
 	float Model::GetRadius() {
 		if (m_radius) return m_radius;

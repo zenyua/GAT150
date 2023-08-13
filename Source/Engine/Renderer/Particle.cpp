@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "Renderer.h"
 
 namespace ringo {
 	void Particle::Update(float dt)
