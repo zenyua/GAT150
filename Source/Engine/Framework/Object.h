@@ -31,6 +31,6 @@ namespace ringo {
 		bool active = true;
 
 	protected:
-		std::string name;
+		std::string name = "";
 	};
 }

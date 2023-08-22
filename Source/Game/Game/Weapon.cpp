@@ -2,6 +2,8 @@
 #include "Renderer/Renderer.h"
 #include "Framework/Framework.h"
 namespace ringo{
+	CLASS_DEFINITION(Weapon);
+
 	bool Weapon::Initialize()
 	{
 		Actor::Initialize();

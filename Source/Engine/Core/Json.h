@@ -4,7 +4,7 @@
 #include <string>
 
 #define READ_DATA(value, data) ringo::Json::Read(value, #data, data, true);
-#define READ_DATA_REQUIRED(value, data) ringo::Json::Read(value, #data, data, true);
+//#define READ_DATA_REQUIRED(value, data) ringo::Json::Read(value, #data, data, true);
 #define HAS_DATA(value, data) value.HasMember(#data)
 #define GET_DATA(value, data) value[#data]
 

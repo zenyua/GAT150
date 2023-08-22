@@ -86,7 +86,7 @@ namespace ringo {
 
 				if (actor->prototype) {
 					std::string name = actor->name;
-					Factory::Instance().RegisterPrototype(actor-> name, std::move(actor));
+					Factory::Instance().RegisterPrototype(name, std::move(actor));
 				}
 				else {
 					Add(std::move(actor));

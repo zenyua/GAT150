@@ -7,13 +7,11 @@
 #include <iostream>
 
 #ifdef _DEBUG
-#define INFO_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Info, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; } };
-#define WARNING_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Warning, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }};
-#define ERROR_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Error, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }};
-//slashes allow the #define to span multiple lines
-#define ASSERT_LOG(condition, message) {\
-if(!condition && ringo::Logger::Instance().Log(ringo::LogLevel::Assert, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; } assert(condition); \
-};
+#define INFO_LOG(message) if(ringo::Logger::Instance().Log(ringo::LogLevel::Info, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }
+#define WARNING_LOG(message) if(ringo::Logger::Instance().Log(ringo::LogLevel::Warning, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }
+#define ERROR_LOG(message) if(ringo::Logger::Instance().Log(ringo::LogLevel::Error, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }
+#define ASSERT_LOG(condition, message) if(!condition && ringo::Logger::Instance().Log(ringo::LogLevel::Assert, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; assert(condition); }
+
 #else
 #define INFO_LOG(message {})
 #define WARNING_LOG(message {})

@@ -90,7 +90,7 @@ namespace ringo {
 		}
 
 		// check if 'name' member exists and is an array with 2 elements
-		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2)
+		if (!value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2)
 		{
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;

@@ -59,7 +59,7 @@ namespace ringo {
 	template<typename T>
 	inline void Factory::Register(const std::string& key)
 	{
-		INFO_LOG("Class registered: " << key);
+		INFO_LOG("Class registered: " << key)
 
 		m_registry[key] = std::make_unique<Creator<T>>();
 	}
@@ -67,7 +67,7 @@ namespace ringo {
 	template<typename T>
 	inline void Factory::RegisterPrototype(const std::string& key, std::unique_ptr<T> prototype)
 	{
-		INFO_LOG("Prototype Class registered " << key);
+		INFO_LOG("Prototype Class registered " << key)
 
 		m_registry[key] = std::make_unique<PrototypeCreator<T>>(std::move(prototype));
 	}
