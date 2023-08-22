@@ -4,7 +4,7 @@ INFO: Factory.h(62) Class registered: ModelRenderComponent
 INFO: Factory.h(62) Class registered: EnginePhysicsComponent
 INFO: Factory.h(62) Class registered: CircleCollisionComponent
 INFO: Factory.h(62) Class registered: Actor
-INFO: Main.cpp(21) testmsg
+INFO: Main.cpp(23) testmsg
 INFO: Json.cpp(26) Successfully read json: scene.json
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string

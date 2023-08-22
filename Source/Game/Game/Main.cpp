@@ -14,6 +14,8 @@
 #include <array>
 #include <map>
 
+#include "Physics/PhysicsSystem.h"
+
 using vec2 = ringo::Vector2;
 
 int main(int argc, char* argv[]) {
@@ -34,6 +36,9 @@ int main(int argc, char* argv[]) {
 	ringo::g_audioSystem.Initialize();
 	ringo::g_audioSystem.AddAudio("meow", "meow.wav");
 	ringo::g_audioSystem.AddAudio("laser", "laser.wav");
+
+	//set up physics
+	ringo::PhysicsSystem::Instance().Initialize();
 
 	//set up renderer
 	ringo::g_renderer.Initialize();

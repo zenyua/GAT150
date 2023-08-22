@@ -7,12 +7,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InputSystem.cpp">
+    <ClCompile Include="PhysicsSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputSystem.h">
+    <ClInclude Include="PhysicsSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
