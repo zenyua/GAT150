@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2.h"
 #include "Matrix33.h"
+#include <Core/Json.h>
 
 namespace ringo {
 	class Transform {
@@ -16,6 +17,7 @@ namespace ringo {
 			position{ position },
 			rotation{ rotation },
 			scale{ scale } {}
+
 		mat3 GetMatrix() const { 
 			mat3 ms = mat3::CreateScale(scale);
 			mat3 mr = mat3::CreateRotation(rotation);
@@ -24,5 +26,7 @@ namespace ringo {
 
 			return mx;
 		}
+
+		void Read(const json_t& value);
 	};
 }

@@ -13,5 +13,6 @@ namespace ringo
 	void MemoryTracker::DisplayInfo()
 	{
 		_CrtMemDumpAllObjectsSince(NULL);
+		std::cout << std::endl;
 	}
 }

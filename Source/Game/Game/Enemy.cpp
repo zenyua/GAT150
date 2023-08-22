@@ -14,7 +14,7 @@ bool Enemy::Initialize()
 	if (collisionComponent) {
 		auto spriteComponent = GetComponent<ringo::SpriteComponent>();
 		if (spriteComponent) {
-			float scale = m_transform.scale;
+			float scale = transform.scale;
 			collisionComponent->m_radius = spriteComponent->GetRadius() * scale;
 		}
 	}
@@ -31,12 +31,12 @@ void Enemy::Update(float dt)
 	ringo::vec2 direction{ 0, 0 };
 
 	if (player) {
-		if (player->m_transform.position.x > m_transform.position.x) {
+		if (player->transform.position.x > transform.position.x) {
 			direction.x++;
 		} else {
 			direction.x--;
 		}
-		if (player->m_transform.position.y > m_transform.position.y) {
+		if (player->transform.position.y > transform.position.y) {
 			direction.y++;
 		}
 		else {
@@ -45,22 +45,22 @@ void Enemy::Update(float dt)
 	}
 
 	if (player) {
-		ringo::Vector2 direction = player->m_transform.position - m_transform.position;
-		m_transform.rotation = direction.Angle() + ringo::HalfPi;
+		ringo::Vector2 direction = player->transform.position - transform.position;
+		transform.rotation = direction.Angle() + ringo::HalfPi;
 	}
 
-	m_transform.position = m_transform.position + (direction * m_speed * dt);
+	transform.position = transform.position + (direction * speed * dt);
 
-	m_transform.position.x = ringo::Wrap(m_transform.position.x, (float)ringo::g_renderer.GetWidth());
-	m_transform.position.y = ringo::Wrap(m_transform.position.y, (float)ringo::g_renderer.GetHeight());
+	transform.position.x = ringo::Wrap(transform.position.x, (float)ringo::g_renderer.GetWidth());
+	transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());
 }
 
 void Enemy::OnCollision(Actor* other)
 {
-	if (other->m_tag == "Weapon") {
+	if (other->tag == "Weapon") {
 		m_game->AddPoints(100);
 		m_game->AddMoney(10);
-		m_destroyed = true;
+		destroyed = true;
 		ringo::EmitterData data;
 		data.burst = true;
 		data.burstCount = 100;
@@ -73,31 +73,31 @@ void Enemy::OnCollision(Actor* other)
 		data.speedMax = 250;
 		data.damping = 0.5f;
 		data.color = ringo::Color{ 1, 0, 0, 1 };
-		ringo::Transform transform{ { m_transform.position }, 0, 1 };
+		ringo::Transform transform{ { transform.position }, 0, 1 };
 		auto emitter = std::make_unique<ringo::Emitter>(transform, data);
-		emitter->m_lifespan = 1.0f;
+		emitter->lifespan = 1.0f;
 		m_scene->Add(std::move(emitter));
 	}
-	if (other->m_tag == "Player") {
-		m_destroyed = true;
+	if (other->tag == "Player") {
+		destroyed = true;
 	}
 	
 }
 
 //if (player) {
-	//	ringo::Vector2 direction = player->m_transform.position - m_transform.position;
-	//	m_transform.rotation = direction.Angle() + ringo::HalfPi;
+	//	ringo::Vector2 direction = player->transform.position - transform.position;
+	//	transform.rotation = direction.Angle() + ringo::HalfPi;
 	//}
 	////fire weapon when timer reaches 0, then reset the timer to the firerate
 	//m_fireTimer--;
 	///*if (m_fireTimer <= 0) {
-	//	ringo::Transform transform{m_transform.position, m_transform.rotation, 1};
-	//	std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400, m_transform, m_model);
+	//	ringo::Transform transform{transform.position, transform.rotation, 1};
+	//	std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400, transform, m_model);
 	//	m_scene->Add(std::move(weapon));
 	//	m_fireTimer = m_fireRate;
 	//}*/
 
-	//ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(m_transform.rotation);
-	//m_transform.position += forward * m_speed * ringo::g_time.GetDeltaTime();
-	//m_transform.position.x = ringo::Wrap(m_transform.position.x, (float)ringo::g_renderer.GetWidth());
-	//m_transform.position.y = ringo::Wrap(m_transform.position.y, (float)ringo::g_renderer.GetHeight());
+	//ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(transform.rotation);
+	//transform.position += forward * speed * ringo::g_time.GetDeltaTime();
+	//transform.position.x = ringo::Wrap(transform.position.x, (float)ringo::g_renderer.GetWidth());
+	//transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());

@@ -1,15 +1,18 @@
 #pragma once
+#include "Framework/Singleton.h"
+
 #include <string>
 #include <cassert>
 #include <fstream>
+#include <iostream>
 
 #ifdef _DEBUG
-#define INFO_LOG(message) {if(ringo::g_logger.Log(ringo::LogLevel::Info, __FILE__, __LINE__)) { ringo::g_logger << message << "\n"; } };
-#define WARNING_LOG(message) {if(ringo::g_logger.Log(ringo::LogLevel::Warning, __FILE__, __LINE__)) { ringo::g_logger << message << "\n"; }};
-#define ERROR_LOG(message) {if(ringo::g_logger.Log(ringo::LogLevel::Error, __FILE__, __LINE__)) { ringo::g_logger << message << "\n"; }};
+#define INFO_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Info, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; } };
+#define WARNING_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Warning, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }};
+#define ERROR_LOG(message) {if(ringo::Logger::Instance().Log(ringo::LogLevel::Error, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; }};
 //slashes allow the #define to span multiple lines
 #define ASSERT_LOG(condition, message) {\
-if(!condition && ringo::g_logger.Log(ringo::LogLevel::Assert, __FILE__, __LINE__)) { ringo::g_logger << message << "\n"; } assert(condition); \
+if(!condition && ringo::Logger::Instance().Log(ringo::LogLevel::Assert, __FILE__, __LINE__)) { ringo::Logger::Instance() << message << "\n"; } assert(condition); \
 };
 #else
 #define INFO_LOG(message {})
@@ -26,9 +29,9 @@ namespace ringo {
 		Assert
 	};
 
-	class Logger {
+	class Logger : public Singleton<Logger> {
 	public:
-		Logger(LogLevel logLevel, std::ostream* ostream, const std::string& filename = "") :
+		Logger(LogLevel logLevel = LogLevel::Info, std::ostream* ostream = &std::cout, const std::string& filename = "log.txt") :
 			m_ostream{ ostream },
 			m_logLevel {logLevel}
 		{
@@ -45,8 +48,6 @@ namespace ringo {
 		std::ostream* m_ostream = nullptr;
 		std::ofstream m_fstream;
 	};
-
-	extern Logger g_logger;
 
 	template<typename T>
 	inline Logger& Logger::operator<<(T value)

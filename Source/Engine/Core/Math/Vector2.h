@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <sstream>
+#include <iostream>
 
 namespace ringo {
 	class Vector2 {
@@ -53,6 +54,24 @@ namespace ringo {
 		static float Dot(const Vector2& v1, const Vector2& v2);
 	};
 
+	inline std::ostream& operator <<(std::ostream& stream, const Vector2& v)
+	{
+		stream << v.x << " " << v.y;
+		return stream;
+	}
+
+	inline std::istream& operator >> (std::istream& stream, Vector2& v) {
+		std::string line;
+		std::getline(stream, line);
+
+		std::string xs = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") + 1));
+		v.x = std::stof(xs);
+
+		std::string ys = line.substr(line.find(",") + 1, line.find("}") - (line.find(",") + 1));
+		v.y = std::stof(ys);
+		return stream;
+	}
+
 	inline Vector2& Vector2::Rotate(float radians) {
 		// Calculate the sine and cosine of the rotation angle
 		float cosTheta = std::cos(radians);
@@ -91,17 +110,7 @@ namespace ringo {
 		return v1.x * v2.x + v1.y * v2.y;
 	}
 
-	inline std::istream& operator >> (std::istream& stream, Vector2& v) {
-		std::string line;
-		std::getline(stream, line);
-
-		std::string xs = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") + 1));
-		v.x = std::stof(xs);
-
-		std::string ys = line.substr(line.find(",") + 1, line.find("}") - (line.find(",") + 1));
-		v.y = std::stof(ys);
-		return stream;
-	}
+	
 
 	using vec2 = Vector2;
 }

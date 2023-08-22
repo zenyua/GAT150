@@ -1,1 +1,18 @@
-INFO: Main.cpp(35) 
+INFO: Factory.h(62) Class registered: SpriteComponent
+INFO: Factory.h(62) Class registered: ModelRenderComponent
+INFO: Factory.h(62) Class registered: EnginePhysicsComponent
+INFO: Factory.h(62) Class registered: CircleCollisionComponent
+INFO: Factory.h(62) Class registered: Actor
+INFO: Main.cpp(24) testmsg
+INFO: Json.cpp(26) Successfully read json: scene.json
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(67) Json read: bool
+INFO: Json.cpp(67) Json read: bool
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string

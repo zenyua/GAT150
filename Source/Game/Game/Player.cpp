@@ -18,7 +18,7 @@ bool Player::Initialize() {
 	if (collisionComponent) {
 		auto spriteComponent = GetComponent<ringo::SpriteComponent>();
 		if (spriteComponent) {
-			float scale = m_transform.scale;
+			float scale = transform.scale;
 			collisionComponent->m_radius = spriteComponent->GetRadius() * scale * 0.75f;
 		}
 	}
@@ -34,13 +34,13 @@ void Player::Update(float dt)
 	float rotate = 0;
 	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) {
 		rotate = -1;
-		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyA.png", ringo::g_renderer);
+		GetComponent<ringo::SpriteComponent>()->m_texture = GET_RESOURCE(ringo::Texture, "KirbyA.png", ringo::g_renderer);
 	}
 	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) {
 		rotate = 1;
-		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyD.png", ringo::g_renderer);
+		GetComponent<ringo::SpriteComponent>()->m_texture = GET_RESOURCE(ringo::Texture, "KirbyD.png", ringo::g_renderer);
 	}
-	m_transform.rotation += rotate * m_turnRate * ringo::g_time.GetDeltaTime();
+	transform.rotation += rotate * m_turnRate * ringo::g_time.GetDeltaTime();
 
 	//ringo::SpriteComponent* sc = GetComponent<ringo::SpriteComponent>();
 	//sc->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
@@ -50,61 +50,65 @@ void Player::Update(float dt)
 	float thrust = 0.0f;
 	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) {
 		thrust = 1.0f;
-		GetComponent<ringo::SpriteComponent>()->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
+		GetComponent<ringo::SpriteComponent>()->m_texture = GET_RESOURCE(ringo::Texture, "KirbyW.png", ringo::g_renderer);
 	}
 
-	ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(m_transform.rotation);
+	ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(transform.rotation);
 
-	m_physicsComponent->ApplyForce(forward * m_speed * thrust);
+	m_physicsComponent->ApplyForce(forward * speed * thrust);
 
-	m_transform.position.x = ringo::Wrap(m_transform.position.x, static_cast<float>(ringo::g_renderer.GetWidth()));
-	m_transform.position.y = ringo::Wrap(m_transform.position.y, static_cast<float>(ringo::g_renderer.GetHeight()));
+	transform.position.x = ringo::Wrap(transform.position.x, static_cast<float>(ringo::g_renderer.GetWidth()));
+	transform.position.y = ringo::Wrap(transform.position.y, static_cast<float>(ringo::g_renderer.GetHeight()));
 
 	//fire weapon
-	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) &&
-		!ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
-		//ringo::Transform mousePosition;
-		//mousePosition.position = ringo::g_inputSystem.GetMousePosition();
-		//ringo::Transform tempPosition = m_transform;
-		//m_transform.position.Normalize();
-		//mousePosition.position.Normalize();
-		//float angle = ringo::vec2::Angle(m_transform.position, mousePosition.position);
-		////float angle = ringo::vec2::SignedAngle(mousePosition.position,m_transform.position);
-		//angle = ringo::RadiansToDegrees(angle);
-		//m_transform = tempPosition;
-		
-		//create weapon
-		ringo::Transform transform1{m_transform.position, m_transform.rotation, 1};
-		//std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(40.0f, transform1, m_model);
-		// ^ line was changed to next line
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(40.0f, transform1); //removed , m_model
-		weapon->m_tag = "Weapon";
+	//if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) &&
+	//	!ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
+	auto weapon = INSTANTIATE(Weapon, "Rocket");
+	//weapon->transform = {};
+	weapon->Initialize();
+	m_scene->Add(std::move(weapon));
+	//	//ringo::Transform mousePosition;
+	//	//mousePosition.position = ringo::g_inputSystem.GetMousePosition();
+	//	//ringo::Transform tempPosition = transform;
+	//	//transform.position.Normalize();
+	//	//mousePosition.position.Normalize();
+	//	//float angle = ringo::vec2::Angle(transform.position, mousePosition.position);
+	//	////float angle = ringo::vec2::SignedAngle(mousePosition.position,transform.position);
+	//	//angle = ringo::RadiansToDegrees(angle);
+	//	//transform = tempPosition;
+	//	
+	//	//create weapon
+	//	ringo::Transform transform1{transform.position, transform.rotation, 1};
+	//	//std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(40.0f, transform1, m_model);
+	//	// ^ line was changed to next line
+	//	std::unique_ptr<ringo::Weapon> weapon = std::make_unique<ringo::Weapon>(40.0f, transform1); //removed , m_model
+	//	//weapon->tag = "Weapon";
 
-		//maple had to include texture, but i didn't? also resourcemanager
-		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("kirbyl.png", ringo::g_renderer);
-		weapon->AddComponent(std::move(component));
+	//	//maple had to include texture, but i didn't? also resourcemanager
+	//	std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
+	//	component->m_texture = GET_RESOURCE(ringo::Texture, "KirbyL.png", ringo::g_renderer);
+	//	weapon->AddComponent(std::move(component));
 
-		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
-		collisionComponent->m_radius = 30.0f;
-		weapon->AddComponent(std::move(collisionComponent));
+	//	auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+	//	collisionComponent->m_radius = 30.0f;
+	//	weapon->AddComponent(std::move(collisionComponent));
 
-		m_scene->Add(std::move(weapon));
+	//	m_scene->Add(std::move(weapon));
 
-		ringo::Transform transform2{m_transform.position, m_transform.rotation - ringo::DegreesToRadians(-10), 1};
-		weapon = std::make_unique<Weapon>(40.0f, transform2); //removed , m_model
-		weapon->m_tag = "Weapon";
+	//	ringo::Transform transform2{transform.position, transform.rotation - ringo::DegreesToRadians(-10), 1};
+	//	weapon = std::make_unique<Weapon>(40.0f, transform2); //removed , m_model
+	//	weapon->tag = "Weapon";
 
-		component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("kirbyl.png", ringo::g_renderer);
-		weapon->AddComponent(std::move(component));
+	//	component = std::make_unique<ringo::SpriteComponent>();
+	//	component->m_texture = GET_RESOURCE(ringo::Texture, "KirbyL.png", ringo::g_renderer);
+	//	weapon->AddComponent(std::move(component));
 
-		collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
-		collisionComponent->m_radius = 30.0f;
-		weapon->AddComponent(std::move(collisionComponent));
+	//	collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+	//	collisionComponent->m_radius = 30.0f;
+	//	weapon->AddComponent(std::move(collisionComponent));
 
-		m_scene->Add(std::move(weapon));
-	}
+	//	m_scene->Add(std::move(weapon));
+	//}
 
 	if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) ringo::g_time.SetTimeScale(0.5f);
 	else ringo::g_time.SetTimeScale(1.0f);
@@ -113,8 +117,8 @@ void Player::Update(float dt)
 void Player::OnCollision(Actor* other)
 {
 	//change to EnemyBullet?
-	if (other->m_tag == "Enemy") {
-		m_destroyed = true;
+	if (other->tag == "Enemy") {
+		destroyed = true;
 		m_game->m_state = Mewmont::eState::PlayerDeadStart;
 		int lives = m_game->GetLives();
 		lives--;

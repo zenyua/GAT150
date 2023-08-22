@@ -10,7 +10,7 @@ public:
 		m_game{ game } {}
 	Player(float speed, float turnRate, const ringo::Transform& transform, Mewmont* game) :
 		Actor{ transform },
-		m_speed{ speed },
+		speed{ speed },
 		m_turnRate{ turnRate },
 		m_game { game } {}
 
@@ -19,7 +19,7 @@ public:
 	void Update(float dt) override;
 	void OnCollision(Actor* other) override;
 private:
-	float m_speed = 0;
+	float speed = 0;
 	float m_turnRate = 0;
 	Mewmont* m_game;
 

@@ -3,7 +3,7 @@
 #include "FileIO.h"
 
 namespace ringo {
-	Logger g_logger(LogLevel::Info, &std::cout, "log.txt");
+	
 
 	bool Logger::Log(LogLevel logLevel, const std::string& filename, int line)
 	{
@@ -28,6 +28,6 @@ namespace ringo {
 
 		*this << getFileName(filename) << "(" << line << ") ";
 
-		return false;
+		return true;
 	}
 }

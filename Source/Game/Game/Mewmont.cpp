@@ -15,20 +15,20 @@
 bool Mewmont::Initialize()
 {
 	//set up text
-	m_titleText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+	m_titleText = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 	m_titleText->Create(ringo::g_renderer, "mewmont", ringo::Color{1, 1, 1, 1});
-	m_scoreText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+	m_scoreText = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 	m_scoreText->Create(ringo::g_renderer, "0", ringo::Color{1, 1, 1, 1});
-	m_gameOverText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+	m_gameOverText = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 	m_gameOverText->Create(ringo::g_renderer, "Game Over", ringo::Color{1, 1, 1, 1});
-	m_scoreTitleText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+	m_scoreTitleText = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 	m_scoreTitleText->Create(ringo::g_renderer, "High Scores", ringo::Color{1, 1, 1, 1});
-	m_moneyText = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+	m_moneyText = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 
 	//set up scores
 	for (int i = 0; i < m_scoresTexts.size(); i++)
 	{
-		m_scoresTexts[i] = std::make_unique<ringo::Text>(ringo::g_resources.Get<ringo::Font>("organo.ttf", 24));
+		m_scoresTexts[i] = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
 	}
 	for (int score : m_scores) {
 		score = 0;
@@ -41,6 +41,8 @@ bool Mewmont::Initialize()
 
 	//create scene
 	m_scene = std::make_unique<ringo::Scene>();
+	m_scene->Load("scene.json");
+	m_scene->Initialize();
 
 	return true;
 }
@@ -57,6 +59,8 @@ void Mewmont::Update(float dt)
 	{
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
+			auto actor = m_scene->GetActorByName("Background");
+			if(actor) actor->active = false;
 		}
 		break;
 	}
@@ -73,7 +77,7 @@ void Mewmont::Update(float dt)
 		transform.scale = 1.0f;
 
 		std::unique_ptr<Player> player = std::make_unique<Player>(2.0f,0.1f,transform,this);
-		player->m_tag = "Player";
+		player->tag = "Player";
 
 		//heart model
 		m_heart->Load("heart.txt");
@@ -88,15 +92,19 @@ void Mewmont::Update(float dt)
 		m_tower->Load("tower.txt");
 
 		//make player components
-		std::unique_ptr<ringo::SpriteComponent> component = std::make_unique<ringo::SpriteComponent>();
-		component->m_texture = ringo::g_resources.Get<ringo::Texture>("KirbyW.png", ringo::g_renderer);
+		//get this line fixed :)
+		auto renderComponent = CREATE_CLASS(SpriteComponent);
+		//ringo::Factory::Instance().Create<ringo::SpriteComponent>("SpriteComponent"); swapped for macro
+
+		auto component = CREATE_CLASS(SpriteComponent);
+		component->m_texture = GET_RESOURCE(ringo::Texture, "KirbyW.png", ringo::g_renderer);
 		player->AddComponent(std::move(component));
 
-		auto physicsComponent = std::make_unique<ringo::EnginePhysicsComponent>();
+		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
-		auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
+		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
 		collisionComponent->m_radius = 10.0f;
 		player->AddComponent(std::move(collisionComponent));
 
@@ -114,11 +122,11 @@ void Mewmont::Update(float dt)
 
 			m_spawnTimer = 0;
 			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 1});
-			enemy->m_tag = "Enemy";
+			enemy->tag = "Enemy";
 			enemy->m_game = this;
 
 			auto spriteComponent = std::make_unique<ringo::SpriteComponent>();
-			spriteComponent->m_texture = ringo::g_resources.Get<ringo::Texture>("Kirbo.png", ringo::g_renderer);
+			spriteComponent->m_texture = GET_RESOURCE(ringo::Texture, "Kirbo.png", ringo::g_renderer);
 			enemy->AddComponent(std::move(spriteComponent));
 
 			auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
@@ -138,7 +146,7 @@ void Mewmont::Update(float dt)
 			transform.scale = 5;
 			transform.rotation = ringo::randomf(360);
 			std::unique_ptr<Tower> tower = std::make_unique<Tower>(5.0f,transform);
-			tower->m_tag = "Tower";
+			tower->tag = "Tower";
 			tower->m_game = this;
 			m_scene->Add(std::move(tower));
 		}*/

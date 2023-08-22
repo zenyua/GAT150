@@ -1,12 +1,17 @@
+#include "Framework/Singleton.h"
+#include "Resource.h"
+
 #include <map>
 #include <memory>
 #include <string>
 #include <cstdarg>
-#include "Resource.h"
+
+#define GET_RESOURCE(type, filename, ...) ringo::ResourceManager::Instance().Get<type>(filename, __VA_ARGS__)
+
 
 namespace ringo
 {
-	class ResourceManager
+	class ResourceManager : public Singleton<ResourceManager>
 	{
 	public:
 		template<typename T, typename ... TArgs>
@@ -28,5 +33,4 @@ namespace ringo
 		m_resources[filename] = resource;
 		return resource;
 	}
-	extern ResourceManager g_resources;
 }

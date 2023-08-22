@@ -13,5 +13,5 @@ public:
 private:
 	float m_fireRate = 0;
 	float m_fireTimer = 0;
-	ringo::Transform weaponTransform = m_transform;
+	ringo::Transform weaponTransform = transform;
 };

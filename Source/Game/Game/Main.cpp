@@ -14,23 +14,12 @@
 #include <array>
 #include <map>
 
-template <typename T>
-void print(const std::string& s, const T& container)
-{
-	std::cout << s << std::endl;
-		for (auto element : container)
-		{
-			std::cout << element << " ";
-		}
-	std::cout << std::endl;
-}
-
 using vec2 = ringo::Vector2;
 
-
-
-
 int main(int argc, char* argv[]) {
+	//maple removed these, it should work without them cuz we're doing this elsewhere
+	//ringo::Factory::Instance().Register<ringo::SpriteComponent>("SpriteComponent");
+	//ringo::Factory::Instance().Register<ringo::CircleCollisionComponent>("CircleCollisionComponent");
 
 	INFO_LOG("testmsg")
 
@@ -59,6 +48,33 @@ int main(int argc, char* argv[]) {
 
 	//set up input
 	ringo::g_inputSystem.Initialize();
+
+	rapidjson::Document document;
+	ringo::Json::Load("json.txt", document);
+
+	std::string str;
+	ringo::Json::Read(document, "string", str);
+	std::cout << str << std::endl;
+
+	bool b;
+	ringo::Json::Read(document, "boolean", b);
+	std::cout << b << std::endl;
+
+	int i1;
+	ringo::Json::Read(document, "integer1", i1);
+	std::cout << i1 << std::endl;
+
+	int i2;
+	ringo::Json::Read(document, "integer2", i2);
+	std::cout << i2 << std::endl;
+
+	float f;
+	ringo::Json::Read(document, "float", f);
+	std::cout << f << std::endl;
+
+	ringo::vec2 v2;
+	ringo::Json::Read(document, "vector2", v2, true);
+	std::cout << v2 << std::endl;
 
 	//make a texture
 	//ringo::res_t<ringo::Texture> texture = ringo::g_resources.Get<ringo::Texture>("KirbyB.png", ringo::g_renderer);

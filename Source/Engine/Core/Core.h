@@ -6,6 +6,7 @@
 #include "Math/Vector2.h"
 
 #include "FileIO.h"
+#include "Json.h"
 #include "Logger.h"
 #include "Memory.h"
 #include "Random.h"
