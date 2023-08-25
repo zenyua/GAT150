@@ -119,10 +119,12 @@ void Player::OnCollision(Actor* other)
 	//change to EnemyBullet?
 	if (other->tag == "Enemy") {
 		destroyed = true;
-		m_game->m_state = Mewmont::eState::PlayerDeadStart;
-		int lives = m_game->GetLives();
-		lives--;
-		m_game->SetLives(lives);
+
+		ringo::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
+		//m_game->m_state = Mewmont::eState::PlayerDeadStart;
+		//int lives = m_game->GetLives();
+		//lives--;
+		//m_game->SetLives(lives);
 	}
 	//if player dead, go to PlayerDeadStart
 }

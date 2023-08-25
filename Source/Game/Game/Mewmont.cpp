@@ -44,6 +44,12 @@ bool Mewmont::Initialize()
 	m_scene->Load("scene.json");
 	m_scene->Initialize();
 
+	//add events
+	EVENT_SUBSCRIBE("OnAddPoints", Mewmont::OnAddPoints);
+	EVENT_SUBSCRIBE("OnPlayerDead", Mewmont::OnPlayerDead);
+	//ringo::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&Mewmont::AddPoints, this, std::placeholders::_1));
+	//ringo::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&Mewmont::OnPlayerDead, this, std::placeholders::_1));
+
 	return true;
 }
 
@@ -101,7 +107,7 @@ void Mewmont::Update(float dt)
 		player->AddComponent(std::move(component));
 
 		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
-		physicsComponent->m_damping = 0.9f;
+		physicsComponent->damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
 		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
@@ -224,5 +230,18 @@ void Mewmont::Draw(ringo::Renderer& renderer)
 		}
 	}
 	m_scene->Draw(renderer);
+}
+
+
+//OnAddPoints
+void Mewmont::OnAddPoints(const ringo::Event& event)
+{
+	m_score += std::get<int>(event.data);
+}
+
+void Mewmont::OnPlayerDead(const ringo::Event& event)
+{
+	m_lives--;
+	m_state = eState::PlayerDeadStart;
 }
 

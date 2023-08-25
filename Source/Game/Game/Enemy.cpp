@@ -6,7 +6,8 @@
 #include "Renderer/Renderer.h"
 
 #include "Framework/Framework.h"
-
+//put in namespace
+//class_definition macro
 bool Enemy::Initialize()
 {
 	Actor::Initialize();
@@ -57,8 +58,10 @@ void Enemy::Update(float dt)
 
 void Enemy::OnCollision(Actor* other)
 {
+	//when he dies...
+	ringo::EventManager::Instance().DispatchEvent("AddPoints", 100);
 	if (other->tag == "Weapon") {
-		m_game->AddPoints(100);
+		//m_game->AddPoints(100);
 		m_game->AddMoney(10);
 		destroyed = true;
 		ringo::EmitterData data;

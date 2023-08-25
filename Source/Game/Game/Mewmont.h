@@ -3,11 +3,13 @@
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 #include "Renderer/Model.h"
+
+#include "Framework/Event/EventManager.h"
+
 #include <array>
 
-class Mewmont : public ringo::Game {
+class Mewmont : public ringo::Game, ringo::IEventListener {
 public:
-
 	enum class eState {
 		Title,
 		StartGame,
@@ -18,12 +20,17 @@ public:
 		GameOverStart,
 		GameOver
 	};
+
 public:
 	virtual bool Initialize() override;
 	virtual void Shutdown() override;
 
 	virtual void Update(float dt) override;
 	virtual void Draw(ringo::Renderer& renderer) override;
+
+	//void SetState(eState state){m_state = }
+	void OnAddPoints(const ringo::Event& event);
+	void OnPlayerDead(const ringo::Event& event);
 
 	eState m_state = eState::Title;
 private:

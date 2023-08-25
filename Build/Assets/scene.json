@@ -15,7 +15,7 @@
 			"components": [
 				{
 					"type": "SpriteComponent",
-					"name": "spacebackground.jpg"
+					"textureName": "spacebackground.jpg"
 				}
 			]
 		},
@@ -39,6 +39,24 @@
 				{
 					"type": "CircleCollisionComponent",
 					"name": "test"
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Title",
+			"persistent": true,
+			"transform": {
+				"position": [ 400.0, 300.0 ],
+				"scale": 2.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Action_Man.ttf",
+					"fontSize": 24,
+					"text": "ASTEROIDZ"
 				}
 			]
 		}

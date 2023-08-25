@@ -16,7 +16,7 @@ namespace ringo {
 		virtual float GetRadius() override { return m_texture->GetSize().Length() * 0.5f; }
 
 	public:
-		//std::string textureName;
+		std::string textureName;
 		res_t<Texture> m_texture;
 	};
 }

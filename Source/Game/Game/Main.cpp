@@ -15,10 +15,56 @@
 #include <map>
 
 #include "Physics/PhysicsSystem.h"
+#include <functional>
 
 using vec2 = ringo::Vector2;
 
+void print(int i) {
+	std::cout << i << std::endl;
+}
+
+int add(int i1, int i2) {
+	return i1 + i2;
+}
+
+int sub(int i1, int i2) {
+	return i1 - i2;
+}
+
+class A {
+public:
+	int add(int i1, int i2) {
+		return i1 + i2;
+	}
+};
+
+union Data {
+	int i;
+	bool b;
+	char c[6];
+};
+
 int main(int argc, char* argv[]) {
+
+	Data data;
+	data.i = 0;
+	std::cout << data.i << std::endl;
+
+	void (*func_ptr)(int) = &print;
+	func_ptr(5);
+
+	int(*op_ptr)(int, int);
+	op_ptr = add;
+
+	std::cout << op_ptr(4, 4) << std::endl;
+
+	std::function<int(int, int)> op;
+	op = add;
+	std::cout << op(5, 6) << std::endl;
+
+	A a;
+	op = std::bind(&A::add, &a, std::placeholders::_1, std::placeholders::_2);
+	std::cout << op(6, 6) << std::endl;
 
 	INFO_LOG("testmsg")
 
@@ -51,8 +97,9 @@ int main(int argc, char* argv[]) {
 	//set up input
 	ringo::g_inputSystem.Initialize();
 
-	rapidjson::Document document;
-	ringo::Json::Load("json.txt", document);
+	//?????????????????????
+	//rapidjson::Document document;
+	//ringo::Json::Load("json.txt", document);
 
 	bool quit = false;
 	while (!quit) {

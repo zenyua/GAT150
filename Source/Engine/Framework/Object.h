@@ -5,7 +5,18 @@
 
 #define CLASS_DECLARATION(classname) \
 	virtual const char* GetClassName() {return #classname;} \
-	void Read(const json_t& value); \
+	virtual void Read(const json_t& value) override; \
+	virtual std::unique_ptr<Object> Clone() {return std::make_unique<classname>(*this);} \
+	class Register { \
+	public: \
+		Register() { \
+			Factory::Instance().Register<classname>(#classname); \
+		} \
+	}; 
+
+#define CLASS_DECLOORATION(classname) \
+	virtual const char* GetClassName() {return #classname;} \
+	virtual void Read(const json_t& value); \
 	virtual std::unique_ptr<Object> Clone() {return std::make_unique<classname>(*this);} \
 	class Register { \
 	public: \
@@ -24,7 +35,7 @@ namespace ringo {
 		Object(const std::string& name) : name{ name } {}
 		virtual ~Object() { OnDestroy(); }
 
-		CLASS_DECLARATION(Object)
+		CLASS_DECLOORATION(Object)
 
 		virtual bool Initialize() { return true; }
 		virtual void OnDestroy() {}

@@ -9,7 +9,7 @@ namespace ringo {
 
 	bool SpriteComponent::Initialize()
 	{
-		if(!name.empty()) m_texture = GET_RESOURCE(Texture, name, g_renderer);
+		if(!textureName.empty()) m_texture = GET_RESOURCE(Texture, textureName, g_renderer);
 
 		return true;
 	}
@@ -18,13 +18,13 @@ namespace ringo {
 	{
 
 	}
-	void ringo::SpriteComponent::Draw(Renderer& renderer)
+	void SpriteComponent::Draw(Renderer& renderer)
 	{
 		renderer.DrawTexture(m_texture.get(), m_owner->transform.position.x, m_owner->transform.position.y, ringo::RadiansToDegrees(m_owner->transform.rotation));
 	}
 
 	void SpriteComponent::Read(const json_t& value) {
-
+		READ_DATA(value, textureName);
 	}
 }
 
