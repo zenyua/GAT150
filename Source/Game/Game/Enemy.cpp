@@ -39,7 +39,7 @@ namespace ringo {
 		if (player) {
 			vec2 direction = player->transform.position - transform.position;
 			//turn towards player
-			float turnAngle = vec2::SignedAngle(forward, direction.Normalized(direction));
+			float turnAngle = vec2::SignedAngle(forward, direction.Normalized());
 
 			m_physicsComponent->ApplyTorque(turnAngle);
 

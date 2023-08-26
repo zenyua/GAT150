@@ -34,8 +34,8 @@ namespace ringo {
 		Vector2& operator /= (const Vector2& v) { x /= v.x; y /= v.y; return *this; }
 		Vector2& operator *= (const Vector2& v) { x *= v.x; y *= v.y; return *this; }
 
-		float LengthSqr() { return (x * x) + (y * y); }
-		float Length() { return std::sqrt(LengthSqr()); }
+		float LengthSqr() const { return (x * x) + (y * y); }
+		float Length() const { return std::sqrt(LengthSqr()); }
 
 		float Distance(const Vector2& v)
 		{
@@ -46,21 +46,13 @@ namespace ringo {
 		//maple doesn't have & on this or definition
 		Vector2& Rotate(float radians);
 
-		Vector2 Normalized(Vector2& v);
+		Vector2 Normalized() const { return *this / Length(); };
 		void Normalize() { *this /= Length(); }
 
 		static float SignedAngle(const Vector2& v1, const Vector2& v2);
 		static float Angle(const Vector2& v1, const Vector2& v2);
 		static float Dot(const Vector2& v1, const Vector2& v2);
 	};
-
-	inline Vector2 Vector2::Normalized(Vector2& v) {
-		float len = v.Length();
-		if (len == 0) {
-			return Vector2(0, 0);
-		}
-		return Vector2(v.x / len, v.y / len);
-	}
 
 	inline std::ostream& operator <<(std::ostream& stream, const Vector2& v)
 	{
