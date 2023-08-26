@@ -87,6 +87,7 @@ namespace ringo {
 	{
 		if (!value.HasMember(name.c_str())) {
 			ERROR_LOG("Missing member in json: " << name.c_str());
+			return false;
 		}
 
 		// check if 'name' member exists and is an array with 2 elements

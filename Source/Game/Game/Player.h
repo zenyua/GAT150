@@ -2,26 +2,28 @@
 #include "Framework/Actor.h"
 #include "Mewmont.h"
 #include <Framework/Components/PhysicsComponent.h>
+namespace ringo {
+	class Player : public Actor {
+	public:
+		CLASS_DECLARATION(Player)
+		/*Player(const ringo::Transform& transform, Mewmont* game) :
+			Actor{ transform },
+			m_game{ game } {}
+		Player(float speed, float turnRate, const ringo::Transform& transform, Mewmont* game) :
+			Actor{ transform },
+			speed{ speed },
+			turnRate{ turnRate },
+			m_game { game } {}*/
 
-class Player : public ringo::Actor {
-public:
-	Player(const ringo::Transform& transform, Mewmont* game) :
-		Actor{ transform },
-		m_game{ game } {}
-	Player(float speed, float turnRate, const ringo::Transform& transform, Mewmont* game) :
-		Actor{ transform },
-		speed{ speed },
-		m_turnRate{ turnRate },
-		m_game { game } {}
+		bool Initialize() override;
 
-	bool Initialize() override;
+		void Update(float dt) override;
+		void OnCollision(Actor* other) override;
+	private:
+		float speed = 0;
+		float turnRate = 0;
+		Mewmont* m_game;
 
-	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
-private:
-	float speed = 0;
-	float m_turnRate = 0;
-	Mewmont* m_game;
-
-	ringo::PhysicsComponent* m_physicsComponent = nullptr;
-};
+		ringo::PhysicsComponent* m_physicsComponent = nullptr;
+	};
+}

@@ -1,11 +1,6 @@
 #include "PhysicsSystem.h"
-#include <box2d/include/box2d/box2d.h>
 
 namespace ringo {
-	PhysicsSystem::PhysicsSystem() {
-
-	}
-
 	bool PhysicsSystem::Initialize() {
 		b2Vec2 gravity{ 0,10 };
 		m_world = std::make_unique<b2World>(gravity);

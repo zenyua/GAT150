@@ -54,6 +54,14 @@ namespace ringo {
 		static float Dot(const Vector2& v1, const Vector2& v2);
 	};
 
+	inline Vector2 Vector2::Normalized(Vector2& v) {
+		float len = v.Length();
+		if (len == 0) {
+			return Vector2(0, 0);
+		}
+		return Vector2(v.x / len, v.y / len);
+	}
+
 	inline std::ostream& operator <<(std::ostream& stream, const Vector2& v)
 	{
 		stream << v.x << " " << v.y;

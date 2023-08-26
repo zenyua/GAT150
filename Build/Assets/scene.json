@@ -3,10 +3,7 @@
 		{
 			"type": "Actor",
 			"name": "Background",
-			"prototype": false,
-			"tag": "Background",
 			"persistent": true,
-			"lifespan": -1.0,
 			"transform": {
 				"position": [ 400.0, 300.0 ],
 				"scale": 1.0,
@@ -16,29 +13,6 @@
 				{
 					"type": "SpriteComponent",
 					"textureName": "spacebackground.jpg"
-				}
-			]
-		},
-		{
-			"type": "Weapon",
-			"name": "Rocket",
-			"prototype": true,
-			"tag": "Player",
-			"lifespan": 2.0,
-			"transform": {
-				"position": [ 400.0, 300.0 ],
-				"scale": 1.0,
-				"rotation": 0.0
-			},
-			"speed": 200.0,
-			"components": [
-				{
-					"type": "SpriteComponent",
-					"name": "rocket.png"
-				},
-				{
-					"type": "CircleCollisionComponent",
-					"name": "test"
 				}
 			]
 		},
@@ -57,6 +31,86 @@
 					"fontName": "Action_Man.ttf",
 					"fontSize": 24,
 					"text": "ASTEROIDZ"
+				}
+			]
+		},
+		{
+			"type": "Weapon",
+			"name": "Rocket",
+			"prototype": true,
+			"tag": "Weapon",
+			"lifespan": 3.0,
+			"transform": {
+				"position": [ 400.0, 300.0 ],
+				"scale": 1.0,
+				"rotation": 0.0
+			},
+			"speed": 200.0,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "rocket.png"
+				},
+				{
+					"type": "CircleCollisionComponent"
+				}
+			]
+		},
+		{
+			"type": "Enemy",
+			"name": "Enemy",
+			"prototype": true,
+			"tag": "Enemy",
+			"transform": {
+				"position": [ 50.0, 50.0 ],
+				"scale": 1.0,
+				"rotation": 0.0
+			},
+			"speed": 5.0,
+			"turnRate": 0.4,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Kirbo.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"damping": 0.98,
+					"angularDamping": 2.0,
+					"gravityScale": 0.0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"size": [ 32.0, 32.0 ]
+				}
+			]
+		},
+		{
+			"type": "Player",
+			"name": "Player",
+			"prototype": true,
+			"tag": "Player",
+			"transform": {
+				"position": [ 400.0, 300.0 ],
+				"scale": 1.0,
+				"rotation": 0.0
+			},
+			"speed": 8.0,
+			"turnRate": 0.5,
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "KirbyW.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"damping": 0.98,
+					"angularDamping": 2.0,
+					"gravityScale": 0.0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"size": [ 32.0, 32.0 ]
 				}
 			]
 		}

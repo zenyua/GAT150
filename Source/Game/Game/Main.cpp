@@ -19,55 +19,7 @@
 
 using vec2 = ringo::Vector2;
 
-void print(int i) {
-	std::cout << i << std::endl;
-}
-
-int add(int i1, int i2) {
-	return i1 + i2;
-}
-
-int sub(int i1, int i2) {
-	return i1 - i2;
-}
-
-class A {
-public:
-	int add(int i1, int i2) {
-		return i1 + i2;
-	}
-};
-
-union Data {
-	int i;
-	bool b;
-	char c[6];
-};
-
 int main(int argc, char* argv[]) {
-
-	Data data;
-	data.i = 0;
-	std::cout << data.i << std::endl;
-
-	void (*func_ptr)(int) = &print;
-	func_ptr(5);
-
-	int(*op_ptr)(int, int);
-	op_ptr = add;
-
-	std::cout << op_ptr(4, 4) << std::endl;
-
-	std::function<int(int, int)> op;
-	op = add;
-	std::cout << op(5, 6) << std::endl;
-
-	A a;
-	op = std::bind(&A::add, &a, std::placeholders::_1, std::placeholders::_2);
-	std::cout << op(6, 6) << std::endl;
-
-	INFO_LOG("testmsg")
-
 	//set up memory
 	ringo::MemoryTracker::Initialize();
 	ringo::MemoryTracker::DisplayInfo();
@@ -97,31 +49,26 @@ int main(int argc, char* argv[]) {
 	//set up input
 	ringo::g_inputSystem.Initialize();
 
-	//?????????????????????
-	//rapidjson::Document document;
-	//ringo::Json::Load("json.txt", document);
-
 	bool quit = false;
 	while (!quit) {
-		//renderer setup
-		ringo::g_renderer.SetColor(255, 255, 255, 0);
-		ringo::g_renderer.BeginFrame();
-		ringo::g_renderer.SetColor(1, 1, 1, 255);
-
-		//time stuff
+		//update engine
 		ringo::g_time.Tick();
-
-		//inputSystem stuff
 		ringo::g_inputSystem.Update();
-
-		//check if ending game
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) {
 			quit = true;
 		}
-
+		//move the particlesystem update to here? that's what maple has
+		ringo::PhysicsSystem::Instance().Update(ringo::g_time.GetDeltaTime());
+		
 		//update game
 		game->Update(ringo::g_time.GetDeltaTime());
+
+		//draw game
+		ringo::g_renderer.SetColor(255, 255, 255, 0);
+		ringo::g_renderer.BeginFrame();
+		ringo::g_renderer.SetColor(1, 1, 1, 255);
 		game->Draw(ringo::g_renderer);
+		//maple has particlesystem draw here
 
 		//audio system stuff
 		ringo::g_audioSystem.Update();

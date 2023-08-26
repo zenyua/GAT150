@@ -3,8 +3,10 @@
 #include "Core/Math/Vector2.h"
 #include <string>
 
-#define READ_DATA(value, data) ringo::Json::Read(value, #data, data, true);
-//#define READ_DATA_REQUIRED(value, data) ringo::Json::Read(value, #data, data, true);
+#define READ_DATA(value, data) ringo::Json::Read(value, #data, data);
+#define READ_DATA_REQUIRED(value, data) ringo::Json::Read(value, #data, data, true);
+#define READ_NAME_DATA(value, name, data) ringo::Json::Read(value, name, data)
+#define READ_NAME_DATA_REQUIRED(value, name, data) ringo::Json::Read(value, name, data, true)
 #define HAS_DATA(value, data) value.HasMember(#data)
 #define GET_DATA(value, data) value[#data]
 

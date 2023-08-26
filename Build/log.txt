@@ -1,17 +1,17 @@
+INFO: Factory.h(62) Class registered: Enemy
+INFO: Factory.h(62) Class registered: Player
 INFO: Factory.h(62) Class registered: Weapon
 INFO: Factory.h(62) Class registered: TextRenderComponent
 INFO: Factory.h(62) Class registered: SpriteComponent
 INFO: Factory.h(62) Class registered: ModelRenderComponent
 INFO: Factory.h(62) Class registered: EnginePhysicsComponent
 INFO: Factory.h(62) Class registered: CircleCollisionComponent
+INFO: Factory.h(62) Class registered: Box2DPhysicsComponent
+INFO: Factory.h(62) Class registered: Box2DCollisionComponent
 INFO: Factory.h(62) Class registered: Actor
-INFO: Main.cpp(69) testmsg
 INFO: Json.cpp(26) Successfully read json: scene.json
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(67) Json read: bool
 INFO: Json.cpp(67) Json read: bool
 INFO: Json.cpp(53) Json read: float
 INFO: Json.cpp(53) Json read: float
@@ -19,28 +19,58 @@ INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(53) Json read: float
-ERROR: Json.cpp(61) Cannot read required json data: persistent
 INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-ERROR: Json.cpp(75) Cannot read required json data: textureName
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(53) Json read: float
-INFO: Factory.h(70) Prototype Class registered Rocket
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-ERROR: Json.cpp(75) Cannot read required json data: tag
-ERROR: Json.cpp(47) Cannot read required json data: lifespan
-INFO: Json.cpp(67) Json read: bool
-ERROR: Json.cpp(61) Cannot read required json data: prototype
 INFO: Json.cpp(53) Json read: float
 INFO: Json.cpp(53) Json read: float
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(81) Json read: string
 INFO: Json.cpp(39) Json read: int
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(67) Json read: bool
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(53) Json read: float
+INFO: Factory.h(70) Prototype Class registered Rocket
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(67) Json read: bool
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Factory.h(70) Prototype Class registered Enemy
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(67) Json read: bool
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(81) Json read: string
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(81) Json read: string
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Json.cpp(53) Json read: float
+INFO: Json.cpp(53) Json read: float
+INFO: Factory.h(70) Prototype Class registered Player
 INFO: EventManager.cpp(15) Event subscribed: OnAddPoints
 INFO: EventManager.cpp(15) Event subscribed: OnPlayerDead

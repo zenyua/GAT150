@@ -78,7 +78,7 @@ namespace ringo {
 		return {
 			{1, 0, 0},
 			{0, 1, 0},
-			{0, 0, 1},
+			{0, 0, 1}
 		};
 
 		//explicitly,
@@ -105,9 +105,10 @@ namespace ringo {
 		// | 0 sy 0 |
 		// | 0  0 1 |
 
-		Matrix33 mx = CreateIdentity();
-		mx[0][0] = scale;
-		mx[1][1] = scale;
+		Matrix33 mx; // Create an empty kitty basket, nyaa~ ????
+		mx[0] = vec3{ 1, 0, 0 }; // Filling the first row with yummy fishies ??
+		mx[1] = vec3{ 0, 1, 0 }; // Second row, here comes the catnip! ??
+		mx[2] = vec3{ 0, 0, 1 }; // And the last row gets a cute lil' mouse toy ??
 
 		return mx;
 	}

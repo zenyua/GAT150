@@ -6,87 +6,90 @@
 #include "Renderer/Renderer.h"
 
 #include "Framework/Framework.h"
-//put in namespace
-//class_definition macro
-bool Enemy::Initialize()
-{
-	Actor::Initialize();
-	auto collisionComponent = GetComponent<ringo::CollisionComponent>();
-	if (collisionComponent) {
-		auto spriteComponent = GetComponent<ringo::SpriteComponent>();
-		if (spriteComponent) {
-			float scale = transform.scale;
-			collisionComponent->m_radius = spriteComponent->GetRadius() * scale;
+namespace ringo {
+	CLASS_DEFINITION(Enemy)
+	bool Enemy::Initialize()
+	{
+		Actor::Initialize();
+
+		m_physicsComponent = GetComponent<PhysicsComponent>();
+
+		auto collisionComponent = GetComponent<ringo::CollisionComponent>();
+		if (collisionComponent) {
+			auto spriteComponent = GetComponent<ringo::SpriteComponent>();
+			if (spriteComponent) {
+				float scale = transform.scale;
+				collisionComponent->m_radius = spriteComponent->GetRadius() * scale;
+			}
 		}
+
+		return true;
 	}
 
-	return true;
+	void Enemy::OnDestroy() {
+		Actor::OnDestroy();
+	}
+
+	void Enemy::Update(float dt)
+	{
+		Actor::Update(dt);
+
+		vec2 forward = vec2{ 0,-1 }.Rotate(transform.rotation);
+		Player* player = m_scene->GetActor<Player>();
+		if (player) {
+			vec2 direction = player->transform.position - transform.position;
+			//turn towards player
+			float turnAngle = vec2::SignedAngle(forward, direction.Normalized(direction));
+
+			m_physicsComponent->ApplyTorque(turnAngle);
+
+			//check if player is in front
+			if (std::fabs(turnAngle) < DegreesToRadians(30.0f)) {
+				//I see you!
+			}
+		}
+
+		m_physicsComponent->ApplyForce(forward * speed);
+
+		transform.position.x = ringo::Wrap(transform.position.x, (float)ringo::g_renderer.GetWidth());
+		transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());
+	}
+
+	void Enemy::OnCollision(Actor* other)
+	{
+		if (other->tag == "Weapon") {
+			ringo::EventManager::Instance().DispatchEvent("AddPoints", 100);
+			m_game->AddMoney(10);
+			destroyed = true;
+			ringo::EmitterData data;
+			data.burst = true;
+			data.burstCount = 100;
+			data.spawnRate = 200;
+			data.angle = 0;
+			data.angleRange = ringo::Pi;
+			data.lifetimeMin = 1.5f;
+			data.speedMin = 50;
+			data.speedMax = 250;
+			data.damping = 0.5f;
+			data.color = ringo::Color{ 1, 0, 0, 1 };
+			ringo::Transform transform{ { this->transform.position }, 0, 1 };
+			auto emitter = std::make_unique<ringo::Emitter>(transform, data);
+			emitter->lifespan = 1.0f;
+			m_scene->Add(std::move(emitter));
+		}
+		if (other->tag == "Player") {
+			destroyed = true;
+		}
+
+	}
+
+	void Enemy::Read(const json_t& value) {
+		Actor::Read(value);
+
+		READ_DATA(value, speed);
+		READ_DATA(value, turnRate);
+	}
 }
-
-void Enemy::Update(float dt)
-{
-	Actor::Update(dt);
-
-	Player* player = m_scene->GetActor<Player>();
-	
-	ringo::vec2 direction{ 0, 0 };
-
-	if (player) {
-		if (player->transform.position.x > transform.position.x) {
-			direction.x++;
-		} else {
-			direction.x--;
-		}
-		if (player->transform.position.y > transform.position.y) {
-			direction.y++;
-		}
-		else {
-			direction.y--;
-		}
-	}
-
-	if (player) {
-		ringo::Vector2 direction = player->transform.position - transform.position;
-		transform.rotation = direction.Angle() + ringo::HalfPi;
-	}
-
-	transform.position = transform.position + (direction * speed * dt);
-
-	transform.position.x = ringo::Wrap(transform.position.x, (float)ringo::g_renderer.GetWidth());
-	transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());
-}
-
-void Enemy::OnCollision(Actor* other)
-{
-	//when he dies...
-	ringo::EventManager::Instance().DispatchEvent("AddPoints", 100);
-	if (other->tag == "Weapon") {
-		//m_game->AddPoints(100);
-		m_game->AddMoney(10);
-		destroyed = true;
-		ringo::EmitterData data;
-		data.burst = true;
-		data.burstCount = 100;
-		data.spawnRate = 200;
-		data.angle = 0;
-		data.angleRange = ringo::Pi;
-		data.lifetimeMin = 0.5f;
-		data.lifetimeMin = 1.5f;
-		data.speedMin = 50;
-		data.speedMax = 250;
-		data.damping = 0.5f;
-		data.color = ringo::Color{ 1, 0, 0, 1 };
-		ringo::Transform transform{ { transform.position }, 0, 1 };
-		auto emitter = std::make_unique<ringo::Emitter>(transform, data);
-		emitter->lifespan = 1.0f;
-		m_scene->Add(std::move(emitter));
-	}
-	if (other->tag == "Player") {
-		destroyed = true;
-	}
-	
-}
-
 //if (player) {
 	//	ringo::Vector2 direction = player->transform.position - transform.position;
 	//	transform.rotation = direction.Angle() + ringo::HalfPi;

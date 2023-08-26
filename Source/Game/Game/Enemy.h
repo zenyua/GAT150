@@ -1,23 +1,24 @@
 #pragma once
 #include "Framework/Actor.h"
-class Enemy : public ringo::Actor {
-public:
-	Enemy(float speed, float turnRate, const ringo::Transform& transform) :
-		Actor{ transform }, 
-		speed{ speed },
-		m_turnRate{ turnRate }
-	{
-		m_fireRate = 2.0f, m_fireTimer = m_fireRate;
-	}
+#include "Framework/Components/PhysicsComponent.h"
 
-	bool Initialize() override;
+namespace ringo {
+	class Enemy : public Actor {
+	public:
+		CLASS_DECLARATION(Enemy)
 
-	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
-private:
-	float speed = 0;
-	float m_turnRate = 0;
+		bool Initialize() override;
+		void OnDestroy() override;
+		void Update(float dt) override;
 
-	float m_fireRate = 0;
-	float m_fireTimer = 0;
-};
+		void OnCollision(Actor* other) override;
+	public:
+		float speed = 0;
+		float turnRate = 0;
+
+		float fireRate = 0;
+		float fireTimer = 0;
+
+		ringo::PhysicsComponent* m_physicsComponent = nullptr;
+	};
+}

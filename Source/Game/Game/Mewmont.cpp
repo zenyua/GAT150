@@ -47,14 +47,13 @@ bool Mewmont::Initialize()
 	//add events
 	EVENT_SUBSCRIBE("OnAddPoints", Mewmont::OnAddPoints);
 	EVENT_SUBSCRIBE("OnPlayerDead", Mewmont::OnPlayerDead);
-	//ringo::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&Mewmont::AddPoints, this, std::placeholders::_1));
-	//ringo::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&Mewmont::OnPlayerDead, this, std::placeholders::_1));
 
 	return true;
 }
 
 void Mewmont::Shutdown()
 {
+
 }
 
 void Mewmont::Update(float dt)
@@ -82,8 +81,11 @@ void Mewmont::Update(float dt)
 		transform.position = { 500.0f, 500.0f };
 		transform.scale = 1.0f;
 
-		std::unique_ptr<Player> player = std::make_unique<Player>(2.0f,0.1f,transform,this);
-		player->tag = "Player";
+		//making the player
+		auto player = INSTANTIATE(Player, "Player");
+		player->transform = ringo::Transform{ {700.0f,700.0f},0.0f,1.0f };
+		player->Initialize();
+		m_scene->Add(std::move(player));
 
 		//heart model
 		m_heart->Load("heart.txt");
@@ -94,29 +96,6 @@ void Mewmont::Update(float dt)
 		transformH2.scale = 4;
 		transformH1.scale = 4;
 
-		//tower model
-		m_tower->Load("tower.txt");
-
-		//make player components
-		//get this line fixed :)
-		auto renderComponent = CREATE_CLASS(SpriteComponent);
-		//ringo::Factory::Instance().Create<ringo::SpriteComponent>("SpriteComponent"); swapped for macro
-
-		auto component = CREATE_CLASS(SpriteComponent);
-		component->m_texture = GET_RESOURCE(ringo::Texture, "KirbyW.png", ringo::g_renderer);
-		player->AddComponent(std::move(component));
-
-		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
-		physicsComponent->damping = 0.9f;
-		player->AddComponent(std::move(physicsComponent));
-
-		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
-		collisionComponent->m_radius = 10.0f;
-		player->AddComponent(std::move(collisionComponent));
-
-		player->Initialize();
-		m_scene->Add(std::move(player));
-
 		m_state = eState::Game;
 		break;
 	}
@@ -126,21 +105,11 @@ void Mewmont::Update(float dt)
 		m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 
-			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(1.0f, ringo::Pi, ringo::Transform{{100, 100}, ringo::randomf(ringo::TwoPi), 1});
-			enemy->tag = "Enemy";
-			enemy->m_game = this;
-
-			auto spriteComponent = std::make_unique<ringo::SpriteComponent>();
-			spriteComponent->m_texture = GET_RESOURCE(ringo::Texture, "Kirbo.png", ringo::g_renderer);
-			enemy->AddComponent(std::move(spriteComponent));
-
-			auto collisionComponent = std::make_unique<ringo::CircleCollisionComponent>();
-			collisionComponent->m_radius = 10.0f;
-			enemy->AddComponent(std::move(collisionComponent));
-
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->transform = ringo::Transform{ {400.0f,400.0f},0.0f,1.0f };
 			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
+			m_spawnTimer = 0.0f;
 		}
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
 			ringo::g_audioSystem.PlayOneShot("laser");

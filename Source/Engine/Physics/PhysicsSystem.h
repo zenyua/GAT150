@@ -1,11 +1,11 @@
 #pragma once
 #include "Framework/Singleton.h"
 #include <Core/Math/Vector2.h>
-#include <box2d/include/box2d/b2_world.h>
+#include <box2d/include/box2d/box2d.h>
 #include <memory>
 
 #define VEC2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
-#define B2VEC2_TO_VEC2(vec) (*(kiko::Vector2*)(&vec))
+#define B2VEC2_TO_VEC2(vec) (*(ringo::Vector2*)(&vec))
 
 namespace ringo
 {
@@ -31,6 +31,7 @@ namespace ringo
 		};
 	public:
 		bool Initialize();
+
 		void Update(float dt);
 
 		b2Body* CreateBody(const vec2& position, float angle, const RigidBodyData& data);
@@ -44,7 +45,7 @@ namespace ringo
 
 		friend class Singleton<PhysicsSystem>;
 	private:
-		PhysicsSystem();
+		PhysicsSystem() = default;
 	private:
 		float m_pixelsPerUnit = 48.0f;
 

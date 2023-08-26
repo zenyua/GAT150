@@ -4,12 +4,11 @@
 namespace ringo {
 	class Weapon : public Actor {
 	public:
-		CLASS_DECLARATION(Weapon) //maybe needs namespace?
+		CLASS_DECLARATION(Weapon) 
 		bool Initialize() override;
 		void Update(float dt) override;
 
 		void OnCollision(Actor* other);
-		//void Read(const json_t& value) override; //included in the class_declaration
 	private:
 		float speed = 0;
 	};
