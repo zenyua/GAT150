@@ -16,6 +16,7 @@ namespace ringo {
 		Matrix33(const vec3& row1, const vec3& row2, const vec3& row3) {
 			rows[0] = row1;
 			rows[1] = row2;
+			rows[2] = row3;
 		}
 
 		vec3  operator [] (size_t index) const { return rows[index]; }
@@ -106,9 +107,9 @@ namespace ringo {
 		// | 0  0 1 |
 
 		Matrix33 mx; // Create an empty kitty basket, nyaa~ ????
-		mx[0] = vec3{ 1, 0, 0 }; // Filling the first row with yummy fishies ??
-		mx[1] = vec3{ 0, 1, 0 }; // Second row, here comes the catnip! ??
-		mx[2] = vec3{ 0, 0, 1 }; // And the last row gets a cute lil' mouse toy ??
+		mx[0] = vec3{ scale, 0.0f, 0.0f }; // Filling the first row with yummy fishies ??
+		mx[1] = vec3{ 0.0f, scale, 0.0f }; // Second row, here comes the catnip! ??
+		mx[2] = vec3{ 0.0f, 0.0f, 1.0f }; // And the last row gets a cute lil' mouse toy ??
 
 		return mx;
 	}

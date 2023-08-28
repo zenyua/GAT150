@@ -18,7 +18,7 @@ namespace ringo {
 		bool Initialize() override;
 
 		void Update(float dt) override;
-		void OnCollision(Actor* other) override;
+		void OnCollisionEnter(Actor* other) override;
 	private:
 		float speed = 0;
 		float turnRate = 0;

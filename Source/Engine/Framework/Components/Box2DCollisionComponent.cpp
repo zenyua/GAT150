@@ -1,6 +1,7 @@
 #include "Box2DCollisionComponent.h"
 #include "Box2DPhysicsComponent.h"
 #include "Framework/Actor.h"
+#include "SpriteComponent.h"
 
 namespace ringo
 {
@@ -11,6 +12,12 @@ namespace ringo
 		auto component = m_owner->GetComponent<Box2DPhysicsComponent>();
 		if (component)
 		{
+			if (data.size.x == 0 && data.size.y == 0) {
+				auto spriteComponent = m_owner->GetComponent<SpriteComponent>();
+				if (spriteComponent) {
+					data.size = vec2{ spriteComponent->source.w, spriteComponent->source.h };
+				}
+			}
 			data.size = data.size * scaleOffset * m_owner->transform.scale;
 
 			if (component->m_body->GetType() == b2_staticBody)
@@ -38,6 +45,6 @@ namespace ringo
 		READ_NAME_DATA(value, "resitution", data.restitution);
 		READ_NAME_DATA(value, "isTrigger", data.isTrigger);
 
-		READ_DATA(value, scaleOffset);
+		READ_DATA(value, scaleOffset); //can scale down the collision box relative to the sprite :D
 	}
 }

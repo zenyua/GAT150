@@ -8,13 +8,11 @@ namespace ringo{
 	{
 		Actor::Initialize();
 
-		auto collisionComponent = GetComponent<ringo::CollisionComponent>();
+		m_physicsComponent = GetComponent<PhysicsComponent>();
+
+		auto collisionComponent = GetComponent<CollisionComponent>();
 		if (collisionComponent) {
-			auto renderComponent = GetComponent<ringo::RenderComponent>();
-			if (renderComponent) {
-				float scale = transform.scale;
-				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
-			}
+			
 		}
 
 		return true;
@@ -25,12 +23,14 @@ namespace ringo{
 		Actor::Update(dt);
 
 		ringo::vec2 forward = ringo::vec2{ 0, -1 }.Rotate(transform.rotation);
-		transform.position += forward * speed * ringo::g_time.GetDeltaTime();
+		//should the velocity be in the initialize instead of update? it's just a design question
+		m_physicsComponent->SetVelocity(forward * speed);
+
 		transform.position.x = ringo::Wrap(transform.position.x, (float)ringo::g_renderer.GetWidth());
 		transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());
 	}
 
-	void Weapon::OnCollision(Actor* other)
+	void Weapon::OnCollisionEnter(Actor* other)
 	{
 		if (other->tag != tag) {
 			destroyed = true;

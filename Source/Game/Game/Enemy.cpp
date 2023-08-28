@@ -55,11 +55,11 @@ namespace ringo {
 		transform.position.y = ringo::Wrap(transform.position.y, (float)ringo::g_renderer.GetHeight());
 	}
 
-	void Enemy::OnCollision(Actor* other)
+	void Enemy::OnCollisionEnter(Actor* other)
 	{
 		if (other->tag == "Weapon") {
 			ringo::EventManager::Instance().DispatchEvent("AddPoints", 100);
-			m_game->AddMoney(10);
+			//m_game->AddMoney(10);
 			destroyed = true;
 			ringo::EmitterData data;
 			data.burst = true;

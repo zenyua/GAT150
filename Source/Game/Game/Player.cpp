@@ -42,7 +42,7 @@ namespace ringo {
 			rotate = 1;
 			GetComponent<ringo::SpriteComponent>()->m_texture = GET_RESOURCE(ringo::Texture, "KirbyD.png", ringo::g_renderer);
 		}
-		//transform.rotation += rotate * turnRate * ringo::g_time.GetDeltaTime();
+
 		m_physicsComponent->ApplyTorque(rotate * turnRate);
 
 		//forward/backwards motion
@@ -63,12 +63,12 @@ namespace ringo {
 			!ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
 
 			auto weapon = INSTANTIATE(Weapon, "Rocket");
-			weapon->transform = { transform.position, transform.rotation + ringo::DegreesToRadians(10.0f), 1 };
+			weapon->transform = { transform.position + forward * 30, transform.rotation + ringo::DegreesToRadians(10.0f), 1 };
 			weapon->Initialize();
 			m_scene->Add(std::move(weapon));
 
 			weapon = INSTANTIATE(Weapon, "Rocket");
-			weapon->transform = { transform.position, transform.rotation - ringo::DegreesToRadians(10.0f), 1 };
+			weapon->transform = { transform.position + forward * 40, transform.rotation - ringo::DegreesToRadians(10.0f), 1 };
 			weapon->Initialize();
 			m_scene->Add(std::move(weapon));
 		}
@@ -77,7 +77,7 @@ namespace ringo {
 		else ringo::g_time.SetTimeScale(1.0f);
 	}
 
-	void Player::OnCollision(Actor* other)
+	void Player::OnCollisionEnter(Actor* other)
 	{
 		//change to EnemyBullet?
 		if (other->tag == "Enemy") {

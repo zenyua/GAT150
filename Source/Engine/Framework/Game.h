@@ -23,7 +23,7 @@ namespace ringo {
 		int GetLives() const { return m_lives; }
 		void SetLives(int lives) { m_lives = lives; }
 
-		void AddMoney(int money) { m_money += money; }
+		//void AddMoney(int money) { m_money += money; }
 	protected:
 		std::unique_ptr<Scene> m_scene;
 

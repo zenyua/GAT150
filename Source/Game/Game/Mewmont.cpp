@@ -41,7 +41,7 @@ bool Mewmont::Initialize()
 
 	//create scene
 	m_scene = std::make_unique<ringo::Scene>();
-	m_scene->Load("scene.json");
+	m_scene->Load("scenes/spacescene.json");
 	m_scene->Initialize();
 
 	//add events

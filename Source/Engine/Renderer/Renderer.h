@@ -34,6 +34,8 @@ namespace ringo {
 
 		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
 		void DrawTexture(class Texture* texture, const Transform& transform);
+		//i think this is it
+		void DrawTexture(class Texture* texture, const Rect& source, const Transform& transform);
 
 	private:
 		int m_width = 0;
