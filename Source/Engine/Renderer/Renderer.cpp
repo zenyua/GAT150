@@ -80,6 +80,7 @@ namespace ringo {
 
 	void Renderer::DrawTexture(Texture* texture, const Rect& source, const Transform& transform)
 	{
+		//maple match
 		mat3 mx = transform.GetMatrix();
 
 		vec2 pos = mx.GetTranslation();
@@ -94,23 +95,21 @@ namespace ringo {
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, RadiansToDegrees(mx.GetRotation()), nullptr, SDL_FLIP_NONE);
 
 	}
+	void Renderer::DrawTexture(Texture* texture, const Rect& source, const Transform& transform, const vec2& origin, bool flipH)
+	{
+		mat3 mx = transform.GetMatrix();
 
-	//void Renderer::DrawTexture(Texture* texture, Rect source, const Transform& transform)
-	//{
-	//	mat3 mx = transform.GetMatrix();
+		vec2 pos = mx.GetTranslation();
+		vec2 size = vec2{ source.w, source.h } *mx.GetScale();
 
-	//	vec2 position = mx.GetTranslation();
-	//	vec2 size = vec2{ source.w, source.h } * mx.GetScale();
+		SDL_Rect dest;
+		dest.x = (int)(pos.x - (size.x * origin.x));
+		dest.y = (int)(pos.y - (size.y * origin.y));
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
 
-	//	SDL_Rect dest;
-	//	dest.x = (int)(position.x - (size.x + 0.5f));
-	//	dest.y = (int)(position.y - (size.y + 0.5f));
-	//	//something's broken...
-	//	/*dest.w = (int)texture->GetSize().x;
-	//	dest.h = (int)texture->GetSize().y;*/
-	//	dest.w = (int)source.w;
-	//	dest.h = (int)source.h;
+		SDL_Point center{ (int)(size.x * origin.x), (int)(size.y * origin.y) };
 
-	//	SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, RadiansToDegrees(mx.GetRotation()), NULL, SDL_FLIP_NONE);
-	//}
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, RadiansToDegrees(mx.GetRotation()), &center, (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+	}
 }

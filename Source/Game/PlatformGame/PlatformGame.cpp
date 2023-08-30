@@ -7,30 +7,20 @@
 
 bool PlatformGame::Initialize()
 {
-	//set up scores
-	for (int i = 0; i < m_scoresTexts.size(); i++)
-	{
-		m_scoresTexts[i] = std::make_unique<ringo::Text>(GET_RESOURCE(ringo::Font, "organo.ttf", 24));
-	}
-	for (int score : m_scores) {
-		score = 0;
-	}
-
 	//set up audio
 	ringo::g_audioSystem.Initialize();
-	ringo::g_audioSystem.AddAudio("meow", "meow.wav");
-	ringo::g_audioSystem.AddAudio("laser", "laser.wav");
+	ringo::g_audioSystem.AddAudio("test", "audio/test.wav");
 
 	//create scene
 	m_scene = std::make_unique<ringo::Scene>();
 	m_scene->Load("scenes/platformscene.json");
+	m_scene->Load("scenes/myTiles2.json");
 	m_scene->Initialize();
-	//Maple has this but I don't have the method for it :((
-	//m_scene->SetGame(this);
 
 	//add events
 	EVENT_SUBSCRIBE("OnAddPoints", PlatformGame::OnAddPoints);
 	EVENT_SUBSCRIBE("OnPlayerDead", PlatformGame::OnPlayerDead);
+	EVENT_SUBSCRIBE("OnGetCoin", PlatformGame::OnGetCoin);
 
 	return true;
 }
@@ -46,6 +36,24 @@ void PlatformGame::Update(float dt)
 	{
 	case PlatformGame::eState::Title:
 	{
+		auto coin = INSTANTIATE(Actor, "Coin");
+		coin->transform.position = (ringo::random(0, ringo::g_renderer.GetWidth()), 100);
+		coin->Initialize();
+		m_scene->Add(std::move(coin));
+		/*if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) {
+			auto actor = INSTANTIATE(Actor, "Crate");
+			actor->transform.position = { ringo::random(0,ringo::g_renderer.GetWidth()), 100 };
+			actor->Initialize();
+			m_scene->Add(std::move(actor));
+		}*/
+
+		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_W)) {
+			ringo::g_audioSystem.PlayOneShot("test");
+		}
+		
+		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
+			m_state = eState::StartGame;
+		}
 		break;
 	}
 	case PlatformGame::eState::StartGame:
@@ -55,16 +63,12 @@ void PlatformGame::Update(float dt)
 		break;
 	case PlatformGame::eState::StartLevel:
 	{
-
 		m_state = eState::Game;
 		break;
 	}
 	case PlatformGame::eState::Game:
 	{
 		ringo::g_particleSystem.Update(dt);
-		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
-			ringo::g_audioSystem.PlayOneShot("laser");
-		}
 		
 		break;
 	}
@@ -79,14 +83,6 @@ void PlatformGame::Update(float dt)
 		break;
 	case PlatformGame::eState::GameOverStart:
 		//update score table
-		if (m_score > m_scores[0]) {
-			m_scores[0] = m_score;
-			std::sort(m_scores.begin(), m_scores.end());
-		}
-		for (int i = 0; i < m_scoresTexts.size(); i++)
-		{
-			m_scoresTexts[i]->Create(ringo::g_renderer, std::to_string(m_scores[i]), { 1,1,1,1 });
-		}
 		m_state = eState::GameOver;
 		break;
 	case PlatformGame::eState::GameOver:
@@ -102,26 +98,10 @@ void PlatformGame::Draw(ringo::Renderer& renderer)
 {
 	if (m_state == eState::Game) {
 		ringo::g_particleSystem.Draw(renderer);
-		switch (m_lives) {
-		case 1:
-			m_heart->Draw(renderer, transformH3);
-			break;
-		case 2:
-			m_heart->Draw(renderer, transformH3);
-			m_heart->Draw(renderer, transformH2);
-			break;
-		case 3:
-			m_heart->Draw(renderer, transformH3);
-			m_heart->Draw(renderer, transformH2);
-			m_heart->Draw(renderer, transformH1);
-			break;
-		}
+
 	}
 	if (m_state == eState::GameOver) {
-		for (int i = 6; i >= 0; i--)
-		{
-			m_scoresTexts[i]->Draw(renderer, 300, (10 - i) * 50);
-		}
+
 	}
 	m_scene->Draw(renderer);
 }
@@ -130,7 +110,7 @@ void PlatformGame::Draw(ringo::Renderer& renderer)
 //OnAddPoints
 void PlatformGame::OnAddPoints(const ringo::Event& event)
 {
-	m_score += std::get<int>(event.data);
+	//m_score += std::get<int>(event.data);
 }
 
 void PlatformGame::OnPlayerDead(const ringo::Event& event)
@@ -138,4 +118,25 @@ void PlatformGame::OnPlayerDead(const ringo::Event& event)
 	m_lives--;
 	m_state = eState::PlayerDeadStart;
 }
+
+void PlatformGame::OnGetCoin(const ringo::Event& event)
+{
+	bool coin = true;
+	auto actor = m_scene->GetActorByName("Coin");
+	if (actor) {
+		actor->destroyed = true;
+		auto coin = INSTANTIATE(Actor, "Coin");
+		coin->transform.position = (32, 800);
+		coin->Initialize();
+		m_scene->Add(std::move(coin));
+	}
+}
+//
+//void PlatformGame::OnGetItem(const ringo::Event& event, std::string itemName)
+//{
+//	auto actor = m_scene->GetActorByName(itemName);
+//	if (actor) {
+//		actor->active = false;
+//	}
+//}
 

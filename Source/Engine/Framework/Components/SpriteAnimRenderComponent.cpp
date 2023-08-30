@@ -54,10 +54,10 @@ namespace ringo {
 		int row = (frame - 1) / m_sequence->numColumns;
 
 		//set source rect ...
-		source.x = (int)(column * cellSize.x);
-		source.y = (int)(row * cellSize.y);
-		source.w = (int)(cellSize.x);
-		source.h = (int)(cellSize.y);
+		source.x = (int)(column * cellSize.x) + m_sequence->paddingL;
+		source.y = (int)(row * cellSize.y) + m_sequence->paddingU;
+		source.w = (int)(cellSize.x) - m_sequence->paddingL - m_sequence->paddingR;
+		source.h = (int)(cellSize.y) - m_sequence->paddingD - m_sequence->paddingU;
 	}
 
 	void SpriteAnimRenderComponent::Read(const json_t& value) {
@@ -76,6 +76,10 @@ namespace ringo {
 				READ_NAME_DATA(sequenceValue, "numRows", sequence.numRows);
 				READ_NAME_DATA(sequenceValue, "startFrame", sequence.startFrame);
 				READ_NAME_DATA(sequenceValue, "endFrame", sequence.endFrame);
+				READ_NAME_DATA(sequenceValue, "paddingL", sequence.paddingL);
+				READ_NAME_DATA(sequenceValue, "paddingR", sequence.paddingR);
+				READ_NAME_DATA(sequenceValue, "paddingD", sequence.paddingD);
+				READ_NAME_DATA(sequenceValue, "paddingU", sequence.paddingU);
 
 				// read texture
 				std::string textureName;

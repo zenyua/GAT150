@@ -26,19 +26,14 @@ int main(int argc, char* argv[]) {
 	ringo::seedRandom((unsigned int)time(nullptr));
 
 	//set file path
-	ringo::setFilePath("assets");
-
-	//set up audio
-	ringo::g_audioSystem.Initialize();
-	ringo::g_audioSystem.AddAudio("meow", "meow.wav");
-	ringo::g_audioSystem.AddAudio("laser", "laser.wav");
+	ringo::setFilePath("assets/PlatformGame");
 
 	//set up physics
 	ringo::PhysicsSystem::Instance().Initialize();
 
 	//set up renderer
 	ringo::g_renderer.Initialize();
-	ringo::g_renderer.CreateWindow("csc196", 1920, 1080);
+	ringo::g_renderer.CreateWindow("csc196", 830, 638);
 
 	//set up game
 	std::unique_ptr<PlatformGame> game = std::make_unique<PlatformGame>();

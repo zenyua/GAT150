@@ -15,6 +15,11 @@ namespace ringo {
 			int startFrame = 0;
 			int endFrame = 0;
 
+			int paddingL = 0;
+			int paddingR = 0;
+			int paddingD = 0;
+			int paddingU = 0;
+
 			bool loop = true;
 
 			std::shared_ptr<Texture> texture;

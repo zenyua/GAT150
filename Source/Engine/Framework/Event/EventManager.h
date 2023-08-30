@@ -7,6 +7,7 @@
 
 #define EVENT_SUBSCRIBE(id, function)	ringo::EventManager::Instance().Subscribe(id, this, std::bind(&function, this, std::placeholders::_1))
 #define EVENT_UNSUBSCRIBE(id)			ringo::EventManager::Instance().Unsubscribe(id, this)
+#define EVENT_DISPATCH(id, value)       ringo::EventManager::Instance().DispatchEvent(id, value)
 
 namespace ringo {
 

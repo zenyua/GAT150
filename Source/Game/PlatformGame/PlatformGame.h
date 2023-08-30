@@ -31,6 +31,7 @@ public:
 	//void SetState(eState state){m_state = }
 	void OnAddPoints(const ringo::Event& event);
 	void OnPlayerDead(const ringo::Event& event);
+	void OnGetCoin(const ringo::Event& event);
 
 	eState m_state = eState::Title;
 private:

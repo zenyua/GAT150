@@ -106,10 +106,12 @@ namespace ringo {
 		// | 0 sy 0 |
 		// | 0  0 1 |
 
-		Matrix33 mx; // Create an empty kitty basket, nyaa~ ????
-		mx[0] = vec3{ scale, 0.0f, 0.0f }; // Filling the first row with yummy fishies ??
-		mx[1] = vec3{ 0.0f, scale, 0.0f }; // Second row, here comes the catnip! ??
-		mx[2] = vec3{ 0.0f, 0.0f, 1.0f }; // And the last row gets a cute lil' mouse toy ??
+		int s = (int)scale;
+
+		Matrix33 mx; 
+		mx[0] = vec3{ s, 0, 0 }; 
+		mx[1] = vec3{ 0, s, 0 }; 
+		mx[2] = vec3{ 0, 0, 1 }; 
 
 		return mx;
 	}
@@ -135,6 +137,7 @@ namespace ringo {
 		// | 0 1 y |
 		// | 0 0 1 |
 		Matrix33 mx = CreateIdentity();
+		//swapped
 		mx[0][2] = translate.x;
 		mx[1][2] = translate.y;
 
