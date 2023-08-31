@@ -15,6 +15,8 @@ public:
 		StartGame,
 		StartLevel,
 		Game,
+		StartLevel2,
+		Game2,
 		PlayerDeadStart,
 		PlayerDead,
 		GameOverStart,
@@ -32,6 +34,7 @@ public:
 	void OnAddPoints(const ringo::Event& event);
 	void OnPlayerDead(const ringo::Event& event);
 	void OnGetCoin(const ringo::Event& event);
+	void StartLvl2(const ringo::Event& event);
 
 	eState m_state = eState::Title;
 private:
@@ -41,13 +44,6 @@ private:
 	float m_stateTimer = 0;
 	float m_gameTimer = 0;
 
-	std::array<int, 7> m_scores;
-	std::array<std::unique_ptr<ringo::Text>, 7> m_scoresTexts;
-
-	std::shared_ptr<ringo::Model> m_tower = std::make_shared<ringo::Model>();
-	std::shared_ptr<ringo::Model> m_heart = std::make_shared<ringo::Model>();
-
-	ringo::Transform transformH3;
-	ringo::Transform transformH2;
-	ringo::Transform transformH1;
+	bool makeNewCoin = false;
+	bool makeNewDoor = false;
 };

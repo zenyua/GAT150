@@ -9,18 +9,19 @@ bool PlatformGame::Initialize()
 {
 	//set up audio
 	ringo::g_audioSystem.Initialize();
+	ringo::g_audioSystem.AddAudio("jump", "audio/jump.wav");
 	ringo::g_audioSystem.AddAudio("test", "audio/test.wav");
 
 	//create scene
 	m_scene = std::make_unique<ringo::Scene>();
-	m_scene->Load("scenes/platformscene.json");
-	m_scene->Load("scenes/myTiles2.json");
+	m_scene->Load("scenes/titlescene.json");
 	m_scene->Initialize();
 
 	//add events
 	EVENT_SUBSCRIBE("OnAddPoints", PlatformGame::OnAddPoints);
 	EVENT_SUBSCRIBE("OnPlayerDead", PlatformGame::OnPlayerDead);
 	EVENT_SUBSCRIBE("OnGetCoin", PlatformGame::OnGetCoin);
+	EVENT_SUBSCRIBE("StartLvl2", PlatformGame::StartLvl2);
 
 	return true;
 }
@@ -36,31 +37,31 @@ void PlatformGame::Update(float dt)
 	{
 	case PlatformGame::eState::Title:
 	{
-		auto coin = INSTANTIATE(Actor, "Coin");
-		coin->transform.position = (ringo::random(0, ringo::g_renderer.GetWidth()), 100);
-		coin->Initialize();
-		m_scene->Add(std::move(coin));
-		/*if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) {
-			auto actor = INSTANTIATE(Actor, "Crate");
-			actor->transform.position = { ringo::random(0,ringo::g_renderer.GetWidth()), 100 };
-			actor->Initialize();
-			m_scene->Add(std::move(actor));
-		}*/
-
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_W) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_W)) {
 			ringo::g_audioSystem.PlayOneShot("test");
 		}
 		
 		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
-			m_state = eState::StartGame;
+			m_state = eState::StartLevel2;
+			//m_state = eState::StartGame;
 		}
 		break;
 	}
 	case PlatformGame::eState::StartGame:
+	{
+		m_scene->RemoveAll();
+		m_scene->Load("scenes/platformscene.json");
+		m_scene->Load("scenes/myTiles1.json");
+		m_scene->Initialize();
+		auto coin = INSTANTIATE(Actor, "Coin");
+		coin->transform.position = { 600, 300 };
+		coin->Initialize();
+		m_scene->Add(std::move(coin));
 		m_score = 0;
 		m_lives = 3;
 		m_state = eState::StartLevel;
 		break;
+	}
 	case PlatformGame::eState::StartLevel:
 	{
 		m_state = eState::Game;
@@ -69,9 +70,38 @@ void PlatformGame::Update(float dt)
 	case PlatformGame::eState::Game:
 	{
 		ringo::g_particleSystem.Update(dt);
-		
+		if (ringo::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !ringo::g_inputSystem.GetPrevKeyDown(SDL_SCANCODE_SPACE)) {
+			ringo::g_audioSystem.PlayOneShot("jump");
+		}
+		if (makeNewCoin) {
+			auto coinn = INSTANTIATE(Actor, "Coin");
+			coinn->transform.position = ringo::Vector2{ 25, 610 };
+			coinn->persistent = true;
+			coinn->Initialize();
+			m_scene->Add(std::move(coinn));
+			makeNewCoin = false;
+		}
+		if (makeNewDoor) {
+			auto door = INSTANTIATE(Actor, "Door");
+			door->transform.position = ringo::Vector2{ 100, 100 };
+			door->Initialize();
+			m_scene->Add(std::move(door));
+			makeNewDoor = false;
+		}
 		break;
 	}
+	case eState::StartLevel2:
+	{
+		m_scene->RemoveAll();
+		m_scene->Load("scenes/level2.json");
+		m_scene->Load("scenes/myTiles2.json");
+		m_scene->Initialize();
+		m_state = eState::Game2;
+		break;
+	}
+	case eState::Game2:
+
+		break;
 	case eState::PlayerDeadStart:
 
 		break;
@@ -121,15 +151,16 @@ void PlatformGame::OnPlayerDead(const ringo::Event& event)
 
 void PlatformGame::OnGetCoin(const ringo::Event& event)
 {
-	bool coin = true;
 	auto actor = m_scene->GetActorByName("Coin");
 	if (actor) {
 		actor->destroyed = true;
-		auto coin = INSTANTIATE(Actor, "Coin");
-		coin->transform.position = (32, 800);
-		coin->Initialize();
-		m_scene->Add(std::move(coin));
+		makeNewCoin = true;
+		makeNewDoor = true;
 	}
+}
+void PlatformGame::StartLvl2(const ringo::Event& event)
+{
+	m_state = eState::StartLevel2;
 }
 //
 //void PlatformGame::OnGetItem(const ringo::Event& event, std::string itemName)

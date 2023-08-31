@@ -1,0 +1,42 @@
+{
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Title",
+      "persistent": true,
+      "transform": {
+        "position": [ 400.0, 200.0 ],
+        "scale": 2.0,
+        "rotation": 0.0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "fonts/Organo.ttf",
+          "fontSize": 32,
+          "text": "MEWMONT",
+          "color": [ 0.58, 0.64, 0.45, 1 ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Title",
+      "persistent": true,
+      "transform": {
+        "position": [ 400.0, 400.0 ],
+        "scale": 1.0,
+        "rotation": 0.0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "fonts/Organo.ttf",
+          "fontSize": 8,
+          "text": "PRESS SPACE TO START",
+          "color": [ 0.58, 0.64, 0.45, 1 ]
+        }
+      ]
+    }
+  ]
+}

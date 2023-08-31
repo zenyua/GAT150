@@ -2,6 +2,47 @@
 	"actors": [
 		{
 			"type": "Actor",
+			"name": "Door",
+			"tag": "Door",
+			"prototype": true,
+			"transform": {
+				"position": [ 700.0, 100.0 ],
+				"scale": 1.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/door.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent"
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.5
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Hotbar",
+			"tag": "Hotbar",
+			"persistent": true,
+			"transform": {
+				"position": [ 415.0, 608.0 ],
+				"scale": 1.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hotbar.png"
+				}
+			]
+		},
+		{
+			"type": "Actor",
 			"name": "Coin",
 			"tag": "Coin",
 			"persistent": true,
@@ -28,11 +69,12 @@
 					]
 				},
 				{
-					"type": "Box2DPhysicsComponent"
+					"type": "Box2DPhysicsComponent",
+					"gravityScale": 0.0
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"restitution": 5
+					"restitution": 0.1
 				}
 			]
 		},

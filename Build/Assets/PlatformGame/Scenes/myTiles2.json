@@ -2,7 +2,7 @@
 	"actors": [
 		{
 			"type": "Actor",
-			"name": "grass1",
+			"name": "baseC",
 			"tag": "Ground",
 			"prototype": true,
 			"transform": {
@@ -11,10 +11,10 @@
 			"components": [
 				{
 					"type": "SpriteComponent",
-					"textureName": "textures/grass.png",
+					"textureName": "textures/hills.png",
 					"source": [
-						16,
-						16,
+						0,
+						48,
 						16,
 						16
 					]
@@ -31,21 +31,253 @@
 		},
 		{
 			"type": "Actor",
-			"name": "dirt1",
+			"name": "baseL",
 			"tag": "Ground",
 			"prototype": true,
 			"transform": {
-				"scale": 2.0
+				"scale": 4.0
 			},
 			"components": [
 				{
 					"type": "SpriteComponent",
-					"textureName": "textures/dirt.png",
+					"textureName": "textures/hills.png",
 					"source": [
-						64,
-						64,
+						16,
+						48,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "baseM",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
 						32,
-						32
+						48,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "baseR",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						48,
+						48,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "topL",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						16,
+						0,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "topM",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						32,
+						0,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "topR",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						48,
+						0,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "hillL",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						16,
+						32,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "hillR",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						48,
+						32,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "hillM",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						32,
+						32,
+						16,
+						16
 					]
 				},
 				{
@@ -73,138 +305,18 @@
 					"numColumns": 13,
 					"numRows": 10,
 					"size": [ 64, 64 ],
-					"tileNames": [ "", "grass1", "dirt1" ],
+					"tileNames": [ "", "hillL", "hillM", "hillR", "topL", "topM", "topR", "baseL", "baseM", "baseR", "baseC" ],
 					"tiles": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						1,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						1,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0,
+	7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 7, 8, 9,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6,
+	1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3
 					]
 				}
 			]

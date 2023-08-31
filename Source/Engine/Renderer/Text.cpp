@@ -10,8 +10,7 @@ namespace ringo {
 	}
 	
 	void Text::Create(Renderer& renderer, const std::string& text, const Color& color) {
-		//probably shouldn't be commented out but idk how to fix it :<
-		if (m_texture) SDL_DestroyTexture(m_texture);
+		//if (m_texture) SDL_DestroyTexture(m_texture);
 
 		SDL_Color c{ Color::ToInt(color.r),Color::ToInt(color.g),Color::ToInt(color.b)};
 		SDL_Surface* surface = TTF_RenderText_Solid(m_font->m_ttfFont, text.c_str(), c);

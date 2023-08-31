@@ -48,10 +48,16 @@
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\tilemap.json">
       <Filter>Resources</Filter>
     </None>
-    <None Include="myTiles.json">
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles1.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\titlescene.json">
       <Filter>Resources</Filter>
     </None>
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles2.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\level2.json">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>

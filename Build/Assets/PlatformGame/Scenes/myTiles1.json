@@ -1,0 +1,213 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "grass1",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/grass.png",
+					"source": [
+						16,
+						16,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "dirt1",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 2.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/dirt.png",
+					"source": [
+						64,
+						64,
+						32,
+						32
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "World",
+			"transform": {
+				"position": [
+					32,
+					32
+				]
+			},
+			"components": [
+				{
+					"type": "TilemapComponent",
+					"numColumns": 13,
+					"numRows": 10,
+					"size": [ 64, 64 ],
+					"tileNames": [ "", "grass1", "dirt1" ],
+					"tiles": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						1,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						1,
+						1,
+						1,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						1,
+						1,
+						1,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					]
+				}
+			]
+		}
+	]
+}

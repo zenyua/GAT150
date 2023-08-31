@@ -16,7 +16,7 @@ namespace ringo {
 			if (actorA->destroyed || actorB->destroyed) return;
 
 			actorA->OnCollisionEnter(actorB);
-			actorB->OnCollisionEnter(actorA);
+			if(!actorB->destroyed) actorB->OnCollisionEnter(actorA);
 
 		}
 	}
