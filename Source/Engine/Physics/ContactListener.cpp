@@ -16,7 +16,7 @@ namespace ringo {
 			if (actorA->destroyed || actorB->destroyed) return;
 
 			actorA->OnCollisionEnter(actorB);
-			if(!actorB->destroyed) actorB->OnCollisionEnter(actorA);
+			if(actorB) actorB->OnCollisionEnter(actorA);
 
 		}
 	}
@@ -32,7 +32,9 @@ namespace ringo {
 
 			if (actorA->destroyed || actorB->destroyed) return;
 
+			if (!actorA) return;
 			actorA->OnCollisionExit(actorB);
+			if (!actorB) return;
 			actorB->OnCollisionExit(actorA);
 
 		}

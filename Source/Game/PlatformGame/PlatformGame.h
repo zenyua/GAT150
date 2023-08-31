@@ -34,6 +34,9 @@ public:
 	void OnAddPoints(const ringo::Event& event);
 	void OnPlayerDead(const ringo::Event& event);
 	void OnGetCoin(const ringo::Event& event);
+	void OnGetApple(const ringo::Event& event);
+	void OnGetStrawberry(const ringo::Event& event);
+	void OnGetTree(const ringo::Event& event);
 	void StartLvl2(const ringo::Event& event);
 
 	eState m_state = eState::Title;
@@ -46,4 +49,6 @@ private:
 
 	bool makeNewCoin = false;
 	bool makeNewDoor = false;
+	bool getApple = false;
+	bool getStrawberry = false;
 };

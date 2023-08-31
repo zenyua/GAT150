@@ -1,0 +1,23 @@
+{
+	"actors": [
+		{
+			"type": "Actor",
+			"name": "Win",
+			"persistent": true,
+			"transform": {
+				"position": [ 400.0, 200.0 ],
+				"scale": 2.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "fonts/Organo.ttf",
+					"fontSize": 32,
+					"text": "YOU WIN!",
+					"color": [ 0.58, 0.64, 0.45, 1 ]
+				}
+			]
+		}
+	]
+}

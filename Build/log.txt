@@ -11,201 +11,188 @@ INFO: Factory.h(62) Class registered: Box2DPhysicsComponent
 INFO: Factory.h(62) Class registered: Box2DCollisionComponent
 INFO: Factory.h(62) Class registered: Actor
 INFO: Json.cpp(26) Successfully read json: scenes/titlescene.json
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(39) Json read: int
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(39) Json read: int
 INFO: EventManager.cpp(15) Event subscribed: OnAddPoints
 INFO: EventManager.cpp(15) Event subscribed: OnPlayerDead
 INFO: EventManager.cpp(15) Event subscribed: OnGetCoin
 INFO: EventManager.cpp(15) Event subscribed: StartLvl2
-INFO: Json.cpp(26) Successfully read json: scenes/level2.json
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(39) Json read: int
-INFO: Json.cpp(26) Successfully read json: scenes/myTiles2.json
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
+INFO: EventManager.cpp(15) Event subscribed: OnGetApple
+INFO: EventManager.cpp(15) Event subscribed: OnGetStrawberry
+INFO: EventManager.cpp(15) Event subscribed: OnGetTree
+INFO: Json.cpp(26) Successfully read json: scenes/platformscene.json
+ERROR: Json.cpp(145) Missing member in json: source
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Door
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Coin
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Character
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Crate
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Json.cpp(26) Successfully read json: scenes/myTiles1.json
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered grass1
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered dirt1
+INFO: Json.cpp(26) Successfully read json: scenes/level2.json
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Apple
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Strawberry
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered Tree
+ERROR: Json.cpp(145) Missing member in json: source
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered FruitTree
+INFO: Json.cpp(26) Successfully read json: scenes/myTiles2.json
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered baseC
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered baseL
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered baseM
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered baseR
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered topL
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered topM
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered topR
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered hillL
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered hillR
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
 ERROR: Json.cpp(89) Missing member in json: position
-INFO: Json.cpp(53) Json read: float
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: origin
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(67) Json read: bool
-INFO: Json.cpp(81) Json read: string
 ERROR: Json.cpp(89) Missing member in json: size
-INFO: Json.cpp(53) Json read: float
 ERROR: Json.cpp(89) Missing member in json: scaleOffset
 INFO: Factory.h(70) Prototype Class registered hillM
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(81) Json read: string
-INFO: Json.cpp(39) Json read: int
-INFO: Json.cpp(39) Json read: int
+INFO: Json.cpp(26) Successfully read json: scenes/level3.json
+INFO: Json.cpp(26) Successfully read json: scenes/myTiles3.json
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered middleL
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered middleM
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered middleR
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered baseC
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered baseL
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered baseM
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered baseR
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered topL
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered topM
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered topR
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered hillL
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered hillR
+ERROR: Json.cpp(89) Missing member in json: position
+ERROR: Json.cpp(89) Missing member in json: origin
+ERROR: Json.cpp(89) Missing member in json: size
+ERROR: Json.cpp(89) Missing member in json: scaleOffset
+INFO: Factory.h(70) Prototype Class registered hillM

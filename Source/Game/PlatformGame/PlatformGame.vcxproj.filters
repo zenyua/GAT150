@@ -60,5 +60,11 @@
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\level2.json">
       <Filter>Resources</Filter>
     </None>
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\level3.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles3.json">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>

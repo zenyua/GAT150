@@ -2,6 +2,93 @@
 	"actors": [
 		{
 			"type": "Actor",
+			"name": "middleL",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						16,
+						16,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "middleM",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						32,
+						16,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "middleR",
+			"tag": "Ground",
+			"prototype": true,
+			"transform": {
+				"scale": 4.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/hills.png",
+					"source": [
+						48,
+						16,
+						16,
+						16
+					]
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"isDynamic": false
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.0
+				}
+			]
+		},
+		{
+			"type": "Actor",
 			"name": "baseC",
 			"tag": "Ground",
 			"prototype": true,
@@ -305,18 +392,18 @@
 					"numColumns": 13,
 					"numRows": 10,
 					"size": [ 64, 64 ],
-					"tileNames": [ "", "hillL", "hillM", "hillR", "topL", "topM", "topR", "baseL", "baseM", "baseR", "baseC" ],
+					"tileNames": [ "", "hillL", "hillM", "hillR", "middleL", "middleM", "middleR", "topL", "topM", "topR", "baseL", "baseM", "baseR", "baseC" ],
 					"tiles": [
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0,
-				7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 7, 8, 9,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6,
-				1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+										0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+					6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+					6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+					6, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 4,
+					6, 11, 12, 0, 0, 0, 0, 0, 0, 0, 10, 11, 4,
+					6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+					6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4,
+					3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 					]
 				}
 			]

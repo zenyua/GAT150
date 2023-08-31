@@ -169,8 +169,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\level2.json" />
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\level3.json" />
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles1.json" />
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles2.json" />
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\myTiles3.json" />
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\platformscene.json" />
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\tilemap.json" />
     <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\titlescene.json" />

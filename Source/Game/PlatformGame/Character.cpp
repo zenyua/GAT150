@@ -72,6 +72,15 @@ namespace ringo {
 		if (other->tag == "Door") {
 			EVENT_DISPATCH("StartLvl2", 0);
 		}
+		if (other->tag == "Apple") {
+			EVENT_DISPATCH("OnGetApple", 0);
+		}
+		if (other->tag == "Strawberry") {
+			EVENT_DISPATCH("OnGetStrawberry", 0);
+		}
+		if (other->tag == "FruitTree") {
+			EVENT_DISPATCH("OnGetTree", 0);
+		}
 	}
 
 	void Character::OnCollisionExit(Actor* other)

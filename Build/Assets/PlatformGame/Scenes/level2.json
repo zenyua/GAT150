@@ -2,20 +2,99 @@
 	"actors": [
 		{
 			"type": "Actor",
-			"name": "Title",
-			"persistent": true,
+			"name": "Apple",
+			"prototype": true,
+			"tag": "Apple",
 			"transform": {
-				"position": [ 400.0, 200.0 ],
-				"scale": 2.0,
+				"position": [ 100, 100 ],
+				"scale": 4.0,
 				"rotation": 0.0
 			},
 			"components": [
 				{
-					"type": "TextRenderComponent",
-					"fontName": "fonts/Organo.ttf",
-					"fontSize": 32,
-					"text": "MEWMONT",
-					"color": [ 1, 0, 0, 1 ]
+					"type": "SpriteComponent",
+					"textureName": "textures/apple.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"gravityScale": 0.0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.1
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Strawberry",
+			"prototype": true,
+			"tag": "Strawberry",
+			"transform": {
+				"position": [ 700, 100 ],
+				"scale": 4.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/strawberries.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"gravityScale": 0.0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.1
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Tree",
+			"prototype": true,
+			"tag": "Tree",
+			"transform": {
+				"position": [ 700, 100 ],
+				"scale": 4.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/tree.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent"
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.1
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "FruitTree",
+			"prototype": true,
+			"tag": "FruitTree",
+			"transform": {
+				"position": [ 700, 100 ],
+				"scale": 4.0,
+				"rotation": 0.0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "textures/fruittree.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent"
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0.1
 				}
 			]
 		}

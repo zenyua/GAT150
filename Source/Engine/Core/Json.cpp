@@ -36,7 +36,7 @@ namespace ringo {
 
 		data = value[name.c_str()].GetInt();
 
-		INFO_LOG("Json read: " << "int");
+		//INFO_LOG("Json read: " << "int");
 
 		return true;
 	}
@@ -50,7 +50,7 @@ namespace ringo {
 
 		data = value[name.c_str()].GetFloat();
 
-		INFO_LOG("Json read: " << "float");
+		//INFO_LOG("Json read: " << "float");
 
 		return true;
 	}
@@ -64,7 +64,7 @@ namespace ringo {
 
 		data = value[name.c_str()].GetBool();
 
-		INFO_LOG("Json read: " << "bool");
+		//INFO_LOG("Json read: " << "bool");
 
 		return true;
 	}
@@ -78,7 +78,7 @@ namespace ringo {
 
 		data = value[name.c_str()].GetString();
 
-		INFO_LOG("Json read: " << "string");
+		//INFO_LOG("Json read: " << "string");
 
 		return true;
 	}

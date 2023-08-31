@@ -45,7 +45,6 @@
 			"type": "Actor",
 			"name": "Coin",
 			"tag": "Coin",
-			"persistent": true,
 			"prototype": true,
 			"transform": {
 				"position": [ 400.0, 100.0 ],
@@ -82,9 +81,9 @@
 			"type": "Character",
 			"name": "Character",
 			"tag": "Character",
+			"prototype": true,
 			"speed": 5.0,
-			"jump": 8.0,
-			"persistent": true,
+			"jump": 10.0,
 			"transform": {
 				"position": [ 550.0, 400.0 ],
 				"scale": 2.0,
@@ -152,7 +151,6 @@
 			"name": "Enemy",
 			"tag": "Enemy",
 			"speed": 40.0,
-			"persistent": true,
 			"transform": {
 				"position": [ 440.0, 100.0 ],
 				"scale": 3.0,
@@ -198,7 +196,6 @@
 		{
 			"type": "Actor",
 			"name": "Crate",
-			"persistent": true,
 			"prototype": true,
 			"transform": {
 				"position": [ 100.0, 100.0 ],
@@ -215,25 +212,6 @@
 				},
 				{
 					"type": "Box2DCollisionComponent"
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"name": "Title",
-			"persistent": true,
-			"transform": {
-				"position": [ 400.0, 200.0 ],
-				"scale": 2.0,
-				"rotation": 0.0
-			},
-			"components": [
-				{
-					"type": "TextRenderComponent",
-					"fontName": "fonts/Action_Man.ttf",
-					"fontSize": 32,
-					"text": "MEWMONT",
-					"color": [ 0, 1, 0, 1 ]
 				}
 			]
 		},
